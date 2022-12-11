@@ -18,7 +18,7 @@ const Listitems = ({ data }) => {
         </p>
         <div className="relative">
           <BsThreeDotsVertical
-            className="cursor-pointer text-2xl mx-3 relative"
+            className="cursor-pointer text-2xl mx-3"
             onClick={() => setmenu(!menu)}
           />
           <div
