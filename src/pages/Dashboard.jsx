@@ -3,7 +3,7 @@ const Dashboard = () => {
     <div className="lg:w-5/6 ">
       <hr className="hidden lg:block lg:my-10"/>
       <div className="py-2 px-3 lg:px-10 lg:mt-11">
-      <h1 className="text-4xl font-bold mx-3 mt-3">لوحة التحكم</h1>
+      <h1 className="text-2xl lg:text-4xl font-bold mx-3 mt-3">لوحة التحكم</h1>
       <div className="my-2 border-b">
         <p className="text-lg py-4 mx-3 text-blue-500 w-fit border-b-2 border-blue-500">
           أداء المطعم
