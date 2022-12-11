@@ -11,10 +11,10 @@ const Listitems = ({ data }) => {
     <div className="border my-4 mx-6 rounded-lg ">
       <div className="flex items-center">
         <p
-          className="bg-white text-xl cursor-pointer py-5 px-3 w-full"
+          className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
         >
-          {data.name}
+          <AiOutlinePlus className="mx-2"/> {data.name}
         </p>
         <div className="relative">
           <BsThreeDotsVertical
@@ -35,7 +35,7 @@ const Listitems = ({ data }) => {
         <div>
           <p className="bg-white text-xl p-10">{data.name}</p>
           <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4">
-            <AiOutlinePlus className="mx-1" /> اضف صنف
+            <AiOutlinePlus className="mx-1"/> اضف صنف
           </button>
         </div>
       )}
