@@ -1,12 +1,24 @@
-import { useState } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai'
-import AddMenu from '../components/AddMenu';
+import { useState } from "react";
+import AddMenu from "../components/AddMenu";
+import Button from "../components/Button";
+import Listitems from "../components/Listitems";
+import { fake } from "../data";
 
 const Menu = () => {
-  const [addMenu,setaddMenu]=useState(false);
+  const [addMenu, setaddMenu] = useState(false);
+  const open = () => {
+    setaddMenu(true);
+  };
+
   return (
     <div className="lg:w-4/5">
-      {addMenu&&<AddMenu close={()=>{setaddMenu(false)}}/>}
+      {addMenu && (
+        <AddMenu
+          close={() => {
+            setaddMenu(false);
+          }}
+        />
+      )}
       {/* <AddMenu/> */}
       <hr className="hidden lg:block lg:my-10" />
       <div className="py-2 px-3 lg:px-10 lg:mt-11">
@@ -18,16 +30,13 @@ const Menu = () => {
             نظرة عامة
           </p>
         </div>
-        <button className="bg-blue-500 lg:bg-inherit 
-        p-2 lg:p-10 w-full rounded-full 
-        text-lg lg:text-xl font-bold text-white my-5 
-        lg:rounded-md lg:text-blue-500 lg:border lg:border-blue-500 
-        lg:hover:bg-blue-500 lg:hover:text-white duration-300 flex justify-center items-center"
-        onClick={()=>{setaddMenu(true)}}
-        >
-          <AiOutlinePlus className='text-md mx-1'/>
-          اضف قائمة
-        </button>
+        <div className="shadow-sm my-3 p-5 text-xl bg-white">
+          <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
+          {fake.map((data) => (
+            <Listitems data={data} />
+          ))} {/*list items*/}
+          <Button name="اضف تصنيف" fun={open} />
+        </div>
       </div>
     </div>
   );
