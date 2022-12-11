@@ -33,7 +33,7 @@ const Menu = () => {
         <div className="shadow-sm my-3 p-5 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
           {fake.map((data) => (
-            <Listitems data={data} />
+            <Listitems data={data} key={data.name} />
           ))} {/*list items*/}
           <Button name="اضف تصنيف" fun={open} />
         </div>
