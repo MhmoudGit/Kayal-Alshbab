@@ -11,7 +11,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="lg:w-4/5">
+    <div className="lg:w-4/5 select-none">
       {addMenu && (
         <AddMenu
           close={() => {
