@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
+import Menu from "./pages/Menu";
+import Qrcode from "./pages/Qrcode";
+import Restaurant from "./pages/Restaurant";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div dir="rtl" className="flex flex-col lg:flex-row">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Menu />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/restaurant" element={<Restaurant />} />
+          <Route path="/" element={<Menu />} />
+          <Route path="/qr-code" element={<Qrcode />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
