@@ -7,7 +7,7 @@ import Restaurant from "./pages/Restaurant";
 
 function App() {
   return (
-    <div dir="rtl" className="flex flex-col lg:flex-row">
+    <div dir="rtl" className="flex flex-col lg:flex-row text-indigo-900  bg-gray-50">
       <Router>
         <Navbar />
         <Routes>

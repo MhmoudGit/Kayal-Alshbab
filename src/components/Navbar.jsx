@@ -8,7 +8,7 @@ const Navbar = () => {
   const dot = <BsDot className="text-3xl self-end" />;
 
   return (
-    <nav className="flex flex-col w-full justify-start items-center py-10 lg:w-1/5 lg:h-screen shadow-md bg-slate-100">
+    <nav className="flex flex-col w-full justify-start items-center py-10 lg:w-1/6 lg:h-screen shadow-md bg-white">
       <Link
         to="/"
         className="flex justify-center items-center lg:self-start px-9 mb-5"
@@ -29,7 +29,7 @@ const Navbar = () => {
                         } 
                             m-3 px-2 flex  justify-start items-center whitespace-nowrap rounded-full lg:text-lg font-bold`}
             >
-              <p className="ml-2">{link.icon}</p>
+              <p className="m-2">{link.icon}</p>
               {link.name}
               {pathname === link.route ? dot : null}
             </li>
