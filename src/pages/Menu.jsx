@@ -11,7 +11,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="lg:w-4/5 select-none">
+    <div className="lg:w-5/6 select-none">
       {addMenu && (
         <AddMenu
           close={() => {
@@ -30,7 +30,7 @@ const Menu = () => {
             نظرة عامة
           </p>
         </div>
-        <div className="shadow-sm my-3 p-5 text-xl bg-white">
+        <div className="shadow-sm my-3 p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
           {fake.map((data) => (
             <Listitems data={data} key={data.name} />
