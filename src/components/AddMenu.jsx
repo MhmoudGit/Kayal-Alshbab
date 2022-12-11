@@ -21,7 +21,7 @@ return (
                 <form className="flex flex-col gap-10 w-full my-10" onSubmit={handleSubmit(onSubmit)} >
                     <div className="flex flex-col gap-4 w-full">
                         <label>اسم تصنيف</label>
-                        <input type="text" {...register("categoryName")} className="bg-gray-100 border border-gray-300 py-5 rounded-full" />
+                        <input type="text" {...register("categoryName")} className="bg-gray-100 border outline-none border-gray-300 py-5 px-4 rounded-full" />
                     </div>
                     <div className="flex justify-between gap-3 items-center">
                         <div class="flex items-center justify-center bg-logo w-full md:w-[70%] bg-contain bg-no-repeat bg-center ">
