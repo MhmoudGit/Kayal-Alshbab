@@ -6,3 +6,8 @@ export const navLinks = [
   { id: 3, name: "القائمة", route: "/", icon: <BiPencil /> },
   { id: 4, name: "الكيو ار كود", route: "/qr-code", icon: <BiQrScan /> },
 ];
+
+export const fake = [
+  {name: 'koshary'},
+  {name: 'meat'}
+]
