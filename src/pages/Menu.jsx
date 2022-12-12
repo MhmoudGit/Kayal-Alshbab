@@ -24,7 +24,7 @@ const Menu = () => {
 
   useEffect(() => {
     fetchData();
-  }, [addMenu]);
+  }, [addMenu, deleteData]);
 
   return (
     <div className="lg:w-5/6 select-none">
@@ -49,7 +49,7 @@ const Menu = () => {
         <div className="shadow-sm my-3 p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
           {items?.map((data) => (
-            <Listitems data={data} key={data.id} id={data.id} dlt={deleteData} />
+            <Listitems data={data} key={data._id} id={data._id} dlt={deleteData} />
           ))}
           {/*list items*/}
           <Button name="اضف تصنيف" fun={open} />
