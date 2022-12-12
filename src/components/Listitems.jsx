@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Classtype from "./Classtype";
 
 const Listitems = ({ data, id, dlt }) => {
   const [list, setList] = useState(false);
@@ -8,7 +9,7 @@ const Listitems = ({ data, id, dlt }) => {
  
   
   return (
-    <div className="border my-4 mx-6 rounded-lg ">
+    <div className="border m-4 rounded-lg ">
       <div className="flex items-center">
         <p
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
@@ -33,7 +34,9 @@ const Listitems = ({ data, id, dlt }) => {
       </div>
       {list && (
         <div>
-          <p className="bg-white text-xl p-10">{data.title}</p>
+          <div className="bg-whitetext-xl p-2">
+            <Classtype />
+          </div>
           <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4">
             <AiOutlinePlus className="mx-1"/> اضف صنف
           </button>
