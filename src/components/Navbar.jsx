@@ -4,7 +4,6 @@ import { BsDot } from "react-icons/bs";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const dot = <BsDot className="text-3xl self-end" />;
 
   return (
@@ -18,9 +17,9 @@ const Navbar = () => {
       </Link>
       <ul className=" flex w-full overflow-x-scroll text-sm lg:flex-col lg:overflow-hidden lg:h-full lg:px-5">
         {navLinks.map((link) => (
-          <Link to={link.route}>
+          <Link to={link.route} key={link.name}>
             <li
-              key={link.id}
+              key={link.name}
               className={`
                         ${
                           pathname === link.route
