@@ -2,12 +2,20 @@ import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
+import FormData from "form-data";
+
 function AddMenu({close}) {
     const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data)
-        close()
+    const onSubmit = (values) => {
+        var form = new FormData();
+        console.log(values)
+        form.append("title",values.categoryName);
+        form.append("image",values.categoryImage[0]);
+        axios.post("http://localhost:8000/controlboard/createCategory",form).then((res)=>{
+            console.log(res);
+            close();
+        })
     };
 return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
