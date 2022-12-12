@@ -9,7 +9,7 @@ function App() {
   return (
     <div
       dir="rtl"
-      className="flex flex-col lg:flex-row text-indigo-900  bg-gray-50 min-h-[100vh]"
+      className="flex flex-col lg:flex-row text-indigo-900  bg-gray-50 min-h-[100vh] select-none"
     >
       <Router>
         <Navbar />
