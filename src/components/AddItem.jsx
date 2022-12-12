@@ -32,7 +32,7 @@ return (
                 <AiOutlineArrowRight/> 
                 <h1>إضافة صنف</h1>
             </button>
-            <form className="flex flex-col gap-5 w-full my-10 overflow-y-auto px-5" onSubmit={handleSubmit(onSubmit)} >
+            <form className="flex flex-col gap-5 w-full my-10 overflow-y-auto px-6" onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-2 w-full">
                     <label>اسم الصنف</label>
                     <input type="text" {...register("itemName", {

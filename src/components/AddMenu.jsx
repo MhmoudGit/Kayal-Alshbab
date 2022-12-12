@@ -22,14 +22,14 @@ function AddMenu({close}) {
     };
 return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
-        <div className="flex flex-col gap-4  bg-white p-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">
-                <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none "
+        <div className="flex flex-col gap-4  bg-white py-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">
+                <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none px-5 "
                 onClick={close}
                 >
                     <AiOutlineArrowRight/> 
                     <h1>إضافة تصنيف</h1>
                 </button>
-                <form className="flex flex-col gap-5 w-full my-10" onSubmit={handleSubmit(onSubmit)} >
+                <form className="flex flex-col gap-5 w-full px-6 my-10" onSubmit={handleSubmit(onSubmit)} >
                     <div className="flex flex-col gap-4 w-full">
                         <label>اسم تصنيف</label>
                         <input type="text" {...register("categoryName", {
@@ -42,7 +42,7 @@ return (
                         )}
                     </div>
                     <div className="flex flex-col justify-between gap-3">
-                        <div class="flex  items-center justify-center bg-logo w-full md:w-[70%] bg-contain bg-no-repeat bg-center ">
+                        <div class="flex  items-center justify-center bg-logo w-full md:w-[50%] bg-contain bg-no-repeat bg-center ">
                             <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.categoryImage?"border-red-300":"border-gray-300"}`}>
                                 {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
