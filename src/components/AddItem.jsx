@@ -8,15 +8,15 @@ function AddItem({close,categoryId}) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
         var form = new FormData();
-        // console.log(values)
+        console.log(values)
         form.append("categoryId",categoryId);
         form.append("title",values.itemName);
         form.append("price",values.price);
         form.append("image",values.itemImage[0]);
-        form.append("description",values);
+        form.append("description",values.description);
         form.append("calories",values.calories);
-        axios.post("http://192.168.1.7:8000/controlboard/",form).then((res)=>{
-            // console.log(res.data.success);
+        axios.post("http://192.168.1.7:8000/controlboard/createItem",form).then((res)=>{
+            console.log(res.data.success);
             if(res.data.success){
                 close();
             }else{
@@ -25,27 +25,27 @@ function AddItem({close,categoryId}) {
     };
 return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
-        <div className="flex flex-col gap-2  bg-white p-10  shadow-xl w-full md:w-[80%] lg:w-[60%] fixed right-0 top-0 z-40 h-full">
-            <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none "
+        <div className="flex flex-col gap-2  bg-white py-10  shadow-xl w-full md:w-[80%] lg:w-[60%] fixed right-0 top-0 z-50 h-full ">
+            <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none px-5"
                 onClick={close}
                 >
                 <AiOutlineArrowRight/> 
                 <h1>إضافة صنف</h1>
             </button>
-            <form className="flex flex-col gap-5 w-full my-10 overflow-y-auto px-2" onSubmit={handleSubmit(onSubmit)} >
+            <form className="flex flex-col gap-5 w-full my-10 overflow-y-auto px-5" onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-2 w-full">
-                        <label>اسم الصنف</label>
-                        <input type="text" {...register("itemName", {
+                    <label>اسم الصنف</label>
+                    <input type="text" {...register("itemName", {
                         required:{ value: true, message: "هذا الحقل مطلوب" },
-                })} className={`py-3 px-4 rounded-full border outline-none ${errors?.itemName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                    })} className={`py-3 px-4 rounded-full border outline-none ${errors?.itemName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                     {errors?.itemName && (
                         <small className="text-red-500 text-xs pr-4">
                             {errors?.itemName.message}
                         </small>
                         )}
                 </div>
-                <div className='flex flex-col md:flex-row w-full justify-between items-center gap-5 lg:gap-3'>
-                    <div className='flex flex-col gap-4 justify-around h-full '>
+                <div className='flex flex-col md:flex-row w-full justify-between items-center gap-5 lg:gap-5'>
+                    <div className='flex flex-col gap-4 justify-around w-full md:w-[50%] h-full '>
                         <div className="flex flex-col gap-2 w-full">
                             <label>السعر</label>
                             <div className="w-full relative">
@@ -75,26 +75,38 @@ return (
                             )}
                         </div>
                     </div>
-                    <div className="flex flex-col justify-between">
-                    <div class="flex  items-center justify-center bg-logo w-full bg-contain bg-no-repeat bg-center ">
-                        <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.categoryImage?"border-red-300":"border-gray-300"}`}>
-                            {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
-                                <p class="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                            </div>:<img src={img} alt="" srcset="" className=" w-full object-cover" />}
-                            <input id="dropzone" {...register("itemImage",{
-                                onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
-                                required:{ value: true, message: "هذا الحقل مطلوب" },
-                                })} accept="image/*" type="file" class="hidden"/>
-                        </label>
-                    </div> 
-                    {errors?.itemImage && (
-                        <small className="text-red-500 text-xs ">
-                            {errors?.itemImage.message}
-                        </small>
-                        )}
+                    <div className="flex flex-col justify-between w-full md:w-[50%]">
+                        <div class="flex  items-center justify-center bg-logo w-full bg-contain bg-no-repeat bg-center ">
+                            <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.itemImage?"border-red-300":"border-gray-300"}`}>
+                                {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                    <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
+                                    <p class="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
+                                    <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
+                                    </div>}
+                                <input id="dropzone" {...register("itemImage",{
+                                    onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
+                                    required:{ value: true, message: "هذا الحقل مطلوب" },
+                                    })} accept="image/*" type="file" class="hidden"/>
+                            </label>
+                        </div> 
+                        {errors?.itemImage && (
+                            <small className="text-red-500 text-xs ">
+                                {errors?.itemImage.message}
+                            </small>
+                            )}
                     </div>
+                </div>
+                <div className="flex flex-col gap-2 w-[80%] md:w-[60%]">
+                        <label>وصف الصنف</label>
+                        <textarea
+                            rows={"3"}
+                            {...register("description")} 
+                            className="py-3 px-4 rounded-xl border outline-none bg-gray-100  border-gray-300" />
+                        <small className="text-xs pr-4">
+                        هذا الحقل اختياري
+                        </small>
                 </div>
                 <div className="flex justify-end gap-3 items-center">
                     <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={close}>تجاهل</button>

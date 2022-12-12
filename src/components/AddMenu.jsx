@@ -22,7 +22,7 @@ function AddMenu({close}) {
     };
 return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
-        <div className="flex flex-col gap-4  bg-white p-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-40 h-full">
+        <div className="flex flex-col gap-4  bg-white p-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">
                 <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none "
                 onClick={close}
                 >
@@ -34,7 +34,7 @@ return (
                         <label>اسم تصنيف</label>
                         <input type="text" {...register("categoryName", {
                         required:{ value: true, message: "هذا الحقل مطلوب" },
-                })} className={`py-5 px-4 rounded-full border outline-none ${errors?.categoryName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                        })} className={`py-5 px-4 rounded-full border outline-none ${errors?.categoryName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                     {errors?.categoryName && (
                         <small className="text-red-500 text-xs">
                             {errors?.categoryName.message}
@@ -48,7 +48,9 @@ return (
                                     <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                                     <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
                                     <p class="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                </div>:<img src={img} alt="" srcset="" className=" w-full object-cover" />}
+                                </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
+                                        <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
+                                        </div>}
                                 <input id="dropzone" {...register("categoryImage",{
                                     onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
                                     required:{ value: true, message: "هذا الحقل مطلوب" },
