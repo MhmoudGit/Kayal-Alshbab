@@ -26,7 +26,7 @@ const Listitems = ({ data, id, dlt }) => {
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
         >
-          <AiOutlinePlus className="mx-2"/> {data.title}
+          <AiOutlinePlus className="mx-2" /> {data.title}
         </p>
         <div className="relative">
           <BsThreeDotsVertical
@@ -36,10 +36,17 @@ const Listitems = ({ data, id, dlt }) => {
           <div
             className={`${
               menu ? "block" : "hidden"
-            } absolute bg-white py-1 left-3 m-2 text-sm shadow-md z-10`} 
+            } absolute bg-white py-1 left-3 m-2 text-sm shadow-md z-10`}
           >
-            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 hover:text-white">تعديل</p>
-            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white" onClick={() => dlt(id)}>مسح</p>
+            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 hover:text-white">
+              تعديل
+            </p>
+            <p
+              className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white"
+              onClick={() => dlt(id)}
+            >
+              مسح
+            </p>
           </div>
         </div>
       </div>
@@ -48,8 +55,11 @@ const Listitems = ({ data, id, dlt }) => {
           <div className="bg-whitetext-xl p-2">
             <Classtype />
           </div>
-          <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4" onClick={open}>
-            <AiOutlinePlus className="mx-1"/> اضف صنف
+          <button
+            className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4"
+            onClick={open}
+          >
+            <AiOutlinePlus className="mx-1" /> اضف صنف
           </button>
         </div>
       )}
