@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 
 const Listitems = ({ data, id, dlt }) => {
@@ -11,6 +12,7 @@ const Listitems = ({ data, id, dlt }) => {
     setaddItem(true);
   };
   return (
+    <div className="border m-4 rounded-lg ">
     <div className="border my-4 mx-6 rounded-lg ">
       {additem && (
         <AddItem
@@ -44,6 +46,10 @@ const Listitems = ({ data, id, dlt }) => {
       </div>
       {list && (
         <div>
+          <div className="bg-whitetext-xl p-2">
+            <Classtype />
+          </div>
+          <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4">
           <p className="bg-white text-xl p-10">{data.title}</p>
           <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4" onClick={open}>
             <AiOutlinePlus className="mx-1"/> اضف صنف

@@ -46,7 +46,7 @@ const Menu = () => {
             نظرة عامة
           </p>
         </div>
-        <div className="shadow-sm my-3 p-5 lg:mx-3 text-xl bg-white">
+        <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
           {items?.map((data) => (
             <Listitems data={data} key={data._id} id={data._id} dlt={deleteData} />
