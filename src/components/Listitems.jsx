@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Listitems = ({ data, id }) => {
+const Listitems = ({ data, id, dlt }) => {
   const [list, setList] = useState(false);
   const [menu, setmenu] = useState(false);
  
@@ -27,7 +27,7 @@ const Listitems = ({ data, id }) => {
             } absolute bg-white p-2 px-5 left-3 m-2 text-sm shadow-md z-10`}
           >
             <p className="m-2">تعديل</p>
-            <p className="m-2">مسح</p>
+            <p className="m-2" onClick={() => dlt(id)}>مسح</p>
           </div>
         </div>
       </div>
