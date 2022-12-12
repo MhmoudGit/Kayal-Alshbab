@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Listitems = ({ data }) => {
+const Listitems = ({ data, id }) => {
   const [list, setList] = useState(false);
   const [menu, setmenu] = useState(false);
  
@@ -14,7 +14,7 @@ const Listitems = ({ data }) => {
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
         >
-          <AiOutlinePlus className="mx-2"/> {data.name}
+          <AiOutlinePlus className="mx-2"/> {data.title}
         </p>
         <div className="relative">
           <BsThreeDotsVertical
