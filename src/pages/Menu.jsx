@@ -27,7 +27,7 @@ const Menu = () => {
   }, [addMenu, deleteData]);
 
   return (
-    <div className="lg:w-5/6 select-none">
+    <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
       {addMenu && (
         <AddMenu
           close={() => {

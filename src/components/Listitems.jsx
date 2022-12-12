@@ -33,7 +33,7 @@ const Listitems = ({ data, id, dlt }) => {
       </div>
       {list && (
         <div>
-          <p className="bg-white text-xl p-10">{data.name}</p>
+          <p className="bg-white text-xl p-10">{data.title}</p>
           <button className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4">
             <AiOutlinePlus className="mx-1"/> اضف صنف
           </button>
