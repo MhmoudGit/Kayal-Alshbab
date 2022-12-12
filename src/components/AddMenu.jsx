@@ -17,7 +17,6 @@ function AddMenu({close}) {
             if(res.data.success){
                 close();
             }else{
-
             }
         })
     };
