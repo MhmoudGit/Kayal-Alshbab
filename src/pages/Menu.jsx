@@ -19,7 +19,7 @@ const Menu = () => {
 
   const deleteData = (id) => {
     axios.delete(`http://192.168.1.7:8000/controlBoard/deleteCategory/${id}`)
-         .then(res => console.log(res))
+        .then(res => console.log(res))
   }
 
   useEffect(() => {
