@@ -10,10 +10,10 @@ const Navbar = () => {
     <nav className="flex flex-col w-full justify-start items-center py-10 lg:w-1/6 lg:h-screen shadow-md bg-white">
       <Link
         to="/"
-        className="flex justify-center items-center lg:self-start px-9 mb-5"
+        className="flex justify-center items-center lg:self-start px-9 mb-5 gap-3"
       >
         <img src="./logo.png" alt="logo" className="w-14" />
-        <h1 className="text-xl mb-5">خيال الشباب</h1>
+        <h1 className="text-xl">خيال الشباب</h1>
       </Link>
       <ul className=" flex w-full overflow-x-scroll text-sm lg:flex-col lg:overflow-hidden lg:h-full lg:px-5">
         {navLinks.map((link) => (
