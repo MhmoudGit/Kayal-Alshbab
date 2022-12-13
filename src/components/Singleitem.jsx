@@ -5,7 +5,7 @@ const Singleitem = ({item}) => {
       <img
         src={`http://192.168.1.5:8000/${item.image}`}
         alt="img"
-        className="w-16"
+        className="w-16 rounded-md"
       />
       <div className="flex flex-col gap-2">
         <p>{item.title}</p>

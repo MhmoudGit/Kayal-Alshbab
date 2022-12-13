@@ -56,7 +56,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
 
           </div>
           <button
-            className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4"
+            className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
             onClick={open}
           >
             <AiOutlinePlus className="mx-1" /> اضف صنف
