@@ -24,8 +24,8 @@ const Deletemenu = ({
         className={`${
           menu ? "block" : "hidden"
         } absolute bg-white py-1 left-3 m-2 text-sm shadow-md z-10`}
+        onClick={() => setmenu(!menu)}
       >
-        {" "}
         {/* delete menu */}
         <p
           className="p-2 px-6 cursor-pointer hover:bg-blue-800 hover:text-white"
