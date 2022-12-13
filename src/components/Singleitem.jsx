@@ -7,9 +7,12 @@ const Singleitem = ({item}) => {
         alt="img"
         className="w-16"
       />
-      <div>
+      <div className="flex flex-col gap-2">
         <p>{item.title}</p>
-        <p>سعر</p>
+        <div className="flex gap-3 text-sm justify-center items-center">
+            <p className="bg-sky-100 py-1 px-2 font-semibold text-gray-500 rounded-md">{item.price} ريال سعودي</p>
+            <p className="font-semibold text-gray-500">{item.calories} سعرة حرارية</p>
+        </div>
       </div>
     </div>
   );
