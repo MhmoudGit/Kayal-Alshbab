@@ -3,13 +3,17 @@ import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
+
+
+
 function UpdateItem({oldData,close}) {
-  const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
+
+  const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
         var form = new FormData();
         console.log(values)
-        form.append("categoryId",oldData.categoryId);
+        form.append("categoryId",oldData?.categoryId);
         form.append("title",values.itemName);
         form.append("price",values.price);
         form.append("image",values.itemImage[0]);
@@ -36,7 +40,7 @@ function UpdateItem({oldData,close}) {
                 <div className="flex flex-col gap-10 w-full  overflow-y-auto px-6">
                     <div className="flex flex-col gap-2 w-full">
                         <label>اسم الصنف</label>
-                        <input defaultValue={oldData.title} type="text" {...register("itemName", {
+                        <input defaultValue={oldData?.title} type="text" {...register("itemName", {
                             required:{ value: true, message: "هذا الحقل مطلوب" },
                         })} className={`py-3 px-4 rounded-full border outline-none ${errors?.itemName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                         {errors?.itemName && (
@@ -50,7 +54,7 @@ function UpdateItem({oldData,close}) {
                             <div className="flex flex-col gap-2 w-full">
                                 <label>السعر</label>
                                 <div  className="w-full relative">
-                                    <input  defaultValue={oldData.price} type="number" {...register("price", {
+                                    <input  defaultValue={oldData?.price} type="number" {...register("price", {
                                         required:{ value: true, message: "هذا الحقل مطلوب" },})} 
                                         className={`py-3 px-4 rounded-full w-full border outline-none ${errors?.price ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                                     <p className='absolute left-[0px] inset-y-0 rounded-l-full py-3 px-6 bg-gray-300 font-semibold'>SAR</p>
@@ -64,7 +68,7 @@ function UpdateItem({oldData,close}) {
                             <div className="flex flex-col gap-2 w-full">
                                 <label>السعرات الحرارية</label>
                                 <div className="w-full relative">
-                                    <input  defaultValue={oldData.calories} type="number" {...register("calories", {
+                                    <input  defaultValue={oldData?.calories} type="number" {...register("calories", {
                                         required:{ value: true, message: "هذا الحقل مطلوب" },})} 
                                         className={`py-3 px-4 rounded-full w-full border outline-none ${errors?.calories ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                                     <p className='absolute left-[0px] inset-y-0 rounded-l-full py-3 px-6 bg-gray-300 font-semibold'>Kcal</p>
@@ -86,7 +90,7 @@ function UpdateItem({oldData,close}) {
                                     </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
                                         <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
                                         </div>}
-                                    <input defaultValue={oldData.image} id="dropzone" {...register("itemImage",{
+                                    <input  id="dropzone" {...register("itemImage",{
                                         onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
                                         required:{ value: true, message: "هذا الحقل مطلوب" },
                                         })} accept="image/*" type="file" class="hidden"/>
@@ -102,7 +106,7 @@ function UpdateItem({oldData,close}) {
                     <div className="flex flex-col gap-2 w-[80%] md:w-[60%]">
                             <label>وصف الصنف</label>
                             <textarea
-                                defaultValue={oldData.description}
+                                defaultValue={oldData?.description}
                                 rows={"4"}
                                 {...register("description")} 
                                 className="py-3 px-4 rounded-xl border outline-none bg-gray-100  border-gray-300" />
