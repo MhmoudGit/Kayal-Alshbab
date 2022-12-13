@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
-function UpdateItem({oldData}) {
+function UpdateItem({oldData,close}) {
   const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
