@@ -49,8 +49,8 @@ const Listitems = ({ data, dlt, dltItem }) => {
         <div>
           <div className="bg-whitetext-xl p-2">
 
-            {items?.map((one) => (
-              <Classtype item={one} dltItem={dltItem} />
+            {items?.map((one, i) => (
+              <Classtype item={one} dltItem={dltItem} key={i} />
             ) )}
               {/* Looooppppppppp */}
 
