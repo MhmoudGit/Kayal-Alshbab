@@ -11,16 +11,15 @@ const Listitems = ({ data, dlt, dltItem }) => {
   const [edit, setEdit] = useState(false);
   const Update = <UpdateCategory oldData={data} close={() => setEdit(false)} />;
   const opens = () => {
-    console.log("open category");
     setEdit(true);
   };
   // -----------------------------------------
 
   const [list, setList] = useState(false);
-  const [additem, setaddItem] = useState(false);
+  const [additem, setAddItem] = useState(false);
   const [items, setGetItem] = useState();
   const open = () => {
-    setaddItem(true);
+    setAddItem(true);
   };
 
   const GetItemsData = () => {
@@ -29,6 +28,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
       .then((res) => setGetItem(res.data.Data));
   };
 
+  console.log('loop');
   useEffect(() => {
     GetItemsData();
   }, [additem, dltItem]);
@@ -38,7 +38,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
       {additem && (
         <AddItem
           close={() => {
-            setaddItem(false);
+            setAddItem(false);
           }}
           categoryId={data._id}
         />
