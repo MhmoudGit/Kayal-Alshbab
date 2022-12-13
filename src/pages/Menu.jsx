@@ -51,12 +51,12 @@ const Menu = () => {
           ادارة القوائم
         </h1>
         <div className="my-2 border-b">
-          <p className="text-lg py-4 mx-3 text-blue-500 w-fit border-b-2 border-blue-500">
+          <p className="text-lg py-4 mx-3 text-blue-500 w-fit font-semibold border-b-2 border-blue-500">
             نظرة عامة
           </p>
         </div>
         <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
-          <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
+          <p className="bg-white text-xl py-7 px-5 border-b font-semibold">تصنيف</p>
           {items?.map((data) => (
             <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} />
           ))}

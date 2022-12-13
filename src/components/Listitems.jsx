@@ -34,7 +34,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
   }, [additem, dltItem]);
 
   return (
-    <div className="border m-4 rounded-lg ">
+    <div className="border m-4 rounded-lg font-semibold ">
       {additem && (
         <AddItem
           close={() => {
@@ -63,14 +63,14 @@ const Listitems = ({ data, dlt, dltItem }) => {
 
       {list && (
         <div>
-          <div className="bg-whitetext-xl p-2">
+          <div className="bg-whitetext-xl p-2 font-semibold">
             {items?.map((one, i) => (
               <Classtype item={one} dltItem={dltItem} key={i} />
             ))}
             {/* Looooppppppppp */}
           </div>
           <button
-            className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
+            className="text-sm border font-bold rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
             onClick={open}
           >
             <AiOutlinePlus className="mx-1" /> اضف صنف
