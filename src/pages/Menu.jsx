@@ -10,7 +10,6 @@ const Menu = () => {
   const open = () => {
     setaddMenu(true);
   };
-
   const fetchData = () => {
     axios
       .get("http://192.168.1.5:8000/menu/getCategory")
@@ -19,17 +18,22 @@ const Menu = () => {
 
   const deleteData = (id) => {
     axios.delete(`http://192.168.1.5:8000/controlBoard/deleteCategory/${id}`)
-        .then(res => console.log(res))
+        .then(res => (
+          res.data.success && fetchData()
+        ))
   }
 
   const deleteItem = (id) => {
     axios.delete(`http://192.168.1.5:8000/controlBoard/deleteItem/${id}`)
-        .then(res => console.log(res))
+        .then(res => (
+          res.data.success && fetchData()
+        ))
   }
+  
 
   useEffect(() => {
     fetchData();
-  }, [addMenu,deleteData]);
+  }, [addMenu ]);
 
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
@@ -47,12 +51,12 @@ const Menu = () => {
           ادارة القوائم
         </h1>
         <div className="my-2 border-b">
-          <p className="text-lg py-4 mx-3 text-blue-500 w-fit border-b-2 border-blue-500">
+          <p className="text-lg py-4 mx-3 text-blue-500 w-fit font-semibold border-b-2 border-blue-500">
             نظرة عامة
           </p>
         </div>
         <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
-          <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
+          <p className="bg-white text-xl py-7 px-5 border-b font-semibold">تصنيف</p>
           {items?.map((data) => (
             <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} />
           ))}

@@ -4,38 +4,37 @@ import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
 import axios from "axios";
-import UpdateCategory from './UpdateCategory'
+import UpdateCategory from "./UpdateCategory";
 
 const Listitems = ({ data, dlt, dltItem }) => {
-
   // Updating category
-  const [edit, setEdit] = useState(false)
-  const Update = <UpdateCategory oldData={data} close={() => setEdit(false)} />
+  const [edit, setEdit] = useState(false);
+  const Update = <UpdateCategory oldData={data} close={() => setEdit(false)} />;
   const opens = () => {
-    console.log('open category');
-    setEdit(true)
-  }
-// -----------------------------------------
+    console.log("open category");
+    setEdit(true);
+  };
+  // -----------------------------------------
 
   const [list, setList] = useState(false);
   const [additem, setaddItem] = useState(false);
-  const [items, setGetItem] = useState()
+  const [items, setGetItem] = useState();
   const open = () => {
     setaddItem(true);
   };
 
   const GetItemsData = () => {
-    axios.get(`http://192.168.1.5:8000/controlBoard/getItem/${data._id}`)
-     .then((res) => setGetItem(res.data.Data));
-  }
-
+    axios
+      .get(`http://192.168.1.5:8000/controlBoard/getItem/${data._id}`)
+      .then((res) => setGetItem(res.data.Data));
+  };
 
   useEffect(() => {
-    GetItemsData()
-  },[additem, dltItem])
+    GetItemsData();
+  }, [additem, dltItem]);
 
   return (
-    <div className="border m-4 rounded-lg ">
+    <div className="border m-4 rounded-lg font-semibold ">
       {additem && (
         <AddItem
           close={() => {
@@ -53,21 +52,25 @@ const Listitems = ({ data, dlt, dltItem }) => {
         </p>
 
         {/* Delete Menu */}
-        <Deletemenu item={data} dlt={dlt} editCat={edit} updateCategory={Update} open={opens}/>
+        <Deletemenu
+          item={data}
+          dlt={dlt}
+          editCat={edit}
+          updateCategory={Update}
+          open={opens}
+        />
       </div>
 
       {list && (
         <div>
-          <div className="bg-whitetext-xl p-2">
-
+          <div className="bg-whitetext-xl p-2 font-semibold">
             {items?.map((one, i) => (
               <Classtype item={one} dltItem={dltItem} key={i} />
-            ) )}
-              {/* Looooppppppppp */}
-
+            ))}
+            {/* Looooppppppppp */}
           </div>
           <button
-            className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
+            className="text-sm border font-bold rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
             onClick={open}
           >
             <AiOutlinePlus className="mx-1" /> اضف صنف
