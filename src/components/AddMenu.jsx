@@ -42,19 +42,19 @@ return (
                         )}
                     </div>
                     <div className="flex flex-col justify-between gap-3">
-                        <div class="flex  items-center justify-center bg-logo w-full md:w-[50%] bg-contain bg-no-repeat bg-center ">
-                            <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.categoryImage?"border-red-300":"border-gray-300"}`}>
-                                {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                    <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
-                                    <p class="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                        <div className="flex  items-center justify-center bg-logo w-full md:w-[50%] bg-contain bg-no-repeat bg-center ">
+                            <label  className={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.categoryImage?"border-red-300":"border-gray-300"}`}>
+                                {img===""?<div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                    <p className="mb-2 text-sm text-gray-900 "><span className="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
+                                    <p className="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                 </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
                                         <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
                                         </div>}
                                 <input id="dropzone" {...register("categoryImage",{
                                     onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
                                     required:{ value: true, message: "هذا الحقل مطلوب" },
-                                    })} accept="image/*" type="file" class="hidden"/>
+                                    })} accept="image/*" type="file" className="hidden"/>
                             </label>
                         </div> 
                         {errors?.categoryImage && (
