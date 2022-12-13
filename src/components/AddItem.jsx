@@ -15,7 +15,7 @@ function AddItem({close,categoryId}) {
         form.append("image",values.itemImage[0]);
         form.append("description",values.description);
         form.append("calories",values.calories);
-        axios.post("http://192.168.1.7:8000/controlboard/createItem",form).then((res)=>{
+        axios.post("http://192.168.1.5:8000/controlboard/createItem",form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();

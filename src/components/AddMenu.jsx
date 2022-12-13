@@ -12,7 +12,7 @@ function AddMenu({close}) {
         console.log(values)
         form.append("title",values.categoryName);
         form.append("image",values.categoryImage[0]);
-        axios.post("http://192.168.1.7:8000/controlboard/createCategory",form).then((res)=>{
+        axios.post("http://192.168.1.5:8000/controlboard/createCategory",form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();

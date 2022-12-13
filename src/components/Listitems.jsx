@@ -5,12 +5,14 @@ import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 
 const Listitems = ({ data, id, dlt }) => {
+
   const [list, setList] = useState(false);
   const [menu, setmenu] = useState(false);
   const [additem, setaddItem] = useState(false);
   const open = () => {
     setaddItem(true);
   };
+
   return (
     <div className="border m-4 rounded-lg ">
       {additem && (
@@ -21,7 +23,7 @@ const Listitems = ({ data, id, dlt }) => {
           categoryId={id}
         />
       )}
-      <div className="flex items-center">
+      <div className="flex items-center">  {/**/}
         <p
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
