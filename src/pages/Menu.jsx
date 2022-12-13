@@ -22,9 +22,14 @@ const Menu = () => {
         .then(res => console.log(res))
   }
 
+  const deleteItem = (id) => {
+    axios.delete(`http://192.168.1.5:8000/controlBoard/deleteItem/${id}`)
+        .then(res => console.log(res))
+  }
+
   useEffect(() => {
     fetchData();
-  }, [addMenu, deleteData]);
+  }, [addMenu,deleteData]);
 
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
@@ -49,7 +54,7 @@ const Menu = () => {
         <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b">تصنيف</p>
           {items?.map((data) => (
-            <Listitems data={data} key={data._id} id={data._id} dlt={deleteData} />
+            <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} />
           ))}
           {/*list items*/}
           <Button name="اضف تصنيف" fun={open} />

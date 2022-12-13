@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Deletemenu = ({ id, dlt }) => {
+const Deletemenu = ({ item, dlt}) => {
   const [menu, setmenu] = useState(false);
 
   return (
@@ -22,7 +22,7 @@ const Deletemenu = ({ id, dlt }) => {
         </p>
         <p
           className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white"
-          onClick={() => dlt(id)}
+          onClick={() => dlt(item._id)}
         >
           مسح
         </p>

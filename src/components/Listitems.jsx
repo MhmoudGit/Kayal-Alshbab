@@ -5,7 +5,7 @@ import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
 import axios from "axios";
 
-const Listitems = ({ data, id, dlt }) => {
+const Listitems = ({ data, dlt, dltItem }) => {
   const [list, setList] = useState(false);
   const [additem, setaddItem] = useState(false);
   const [items, setGetItem] = useState()
@@ -14,13 +14,14 @@ const Listitems = ({ data, id, dlt }) => {
   };
 
   const GetItemsData = () => {
-    axios.get(`http://192.168.1.5:8000/controlBoard/getItem/${id}`)
+    axios.get(`http://192.168.1.5:8000/controlBoard/getItem/${data._id}`)
      .then((res) => setGetItem(res.data.Data));
   }
 
+
   useEffect(() => {
     GetItemsData()
-  },[additem])
+  },[additem, dltItem])
 
   return (
     <div className="border m-4 rounded-lg ">
@@ -29,7 +30,7 @@ const Listitems = ({ data, id, dlt }) => {
           close={() => {
             setaddItem(false);
           }}
-          categoryId={id}
+          categoryId={data._id}
         />
       )}
       <div className="flex items-center">
@@ -41,7 +42,7 @@ const Listitems = ({ data, id, dlt }) => {
         </p>
 
         {/* Delete Menu */}
-        <Deletemenu id={id} dlt={dlt} />
+        <Deletemenu item={data} dlt={dlt} />
       </div>
 
       {list && (
@@ -49,7 +50,7 @@ const Listitems = ({ data, id, dlt }) => {
           <div className="bg-whitetext-xl p-2">
 
             {items?.map((one) => (
-              <Classtype item={one} />
+              <Classtype item={one} dltItem={dltItem} />
             ) )}
               {/* Looooppppppppp */}
 
