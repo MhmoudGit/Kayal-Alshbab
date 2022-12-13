@@ -1,13 +1,14 @@
-const Singleitem = () => {
+const Singleitem = ({item}) => {
+
   return (
     <div className="flex gap-5">
       <img
-        src="https://i.pinimg.com/originals/3a/69/ae/3a69ae3942d4a9da6c3cbc93b1c8f051.jpg"
+        src={`http://192.168.1.5:8000/${item.image}`}
         alt="img"
         className="w-16"
       />
       <div>
-        <p>اسم</p>
+        <p>{item.title}</p>
         <p>سعر</p>
       </div>
     </div>

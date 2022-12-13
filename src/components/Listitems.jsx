@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
+import axios from "axios";
 
 const Listitems = ({ data, id, dlt }) => {
   const [list, setList] = useState(false);
   const [additem, setaddItem] = useState(false);
+  const [items, setGetItem] = useState()
   const open = () => {
     setaddItem(true);
   };
+
+  const GetItemsData = () => {
+    axios.get(`http://192.168.1.5:8000/controlBoard/getItem/${id}`)
+     .then((res) => setGetItem(res.data.Data));
+  }
+
+  useEffect(() => {
+    GetItemsData()
+  },[additem])
 
   return (
     <div className="border m-4 rounded-lg ">
@@ -36,7 +47,12 @@ const Listitems = ({ data, id, dlt }) => {
       {list && (
         <div>
           <div className="bg-whitetext-xl p-2">
-            <Classtype />
+
+            {items?.map((one) => (
+              <Classtype item={one} />
+            ) )}
+              {/* Looooppppppppp */}
+
           </div>
           <button
             className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4"
