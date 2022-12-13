@@ -7,6 +7,8 @@ import Listitems from "../components/Listitems";
 const Menu = () => {
   const [addMenu, setaddMenu] = useState(false);
   const [items, setItems] = useState();
+  const [edit, setEdit] = useState(false);
+
   const open = () => {
     setaddMenu(true);
   };
@@ -33,7 +35,7 @@ const Menu = () => {
 
   useEffect(() => {
     fetchData();
-  }, [addMenu ]);
+  }, [addMenu, edit ]);
 
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
@@ -58,7 +60,7 @@ const Menu = () => {
         <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b font-semibold">تصنيف</p>
           {items?.map((data) => (
-            <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} />
+            <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} edit={edit} setEdit={setEdit} />
           ))}
           {/*list items*/}
           <Button name="اضف تصنيف" fun={open} />

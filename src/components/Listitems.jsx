@@ -6,9 +6,8 @@ import Deletemenu from "./Deletemenu";
 import axios from "axios";
 import UpdateCategory from "./UpdateCategory";
 
-const Listitems = ({ data, dlt, dltItem }) => {
+const Listitems = ({ data, dlt, dltItem , edit, setEdit}) => {
   // Updating category
-  const [edit, setEdit] = useState(false);
   const Update = <UpdateCategory oldData={data} close={() => setEdit(false)} />;
   const opens = () => {
     setEdit(true);
@@ -22,6 +21,8 @@ const Listitems = ({ data, dlt, dltItem }) => {
     setAddItem(true);
   };
 
+  const [editItem, setEditItem] = useState(false);
+
   const GetItemsData = () => {
     axios
       .get(`http://192.168.1.5:8000/controlBoard/getItem/${data._id}`)
@@ -31,7 +32,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
   console.log('loop');
   useEffect(() => {
     GetItemsData();
-  }, [additem, dltItem]);
+  }, [additem, dltItem,editItem]);
 
   return (
     <div className="border m-4 rounded-lg font-semibold ">
@@ -65,7 +66,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
         <div>
           <div className="bg-whitetext-xl p-2 font-semibold">
             {items?.map((one, i) => (
-              <Classtype item={one} dltItem={dltItem} key={i} />
+              <Classtype item={one} dltItem={dltItem} key={i} editItem={editItem} setEditItem={setEditItem} />
             ))}
             {/* Looooppppppppp */}
           </div>
