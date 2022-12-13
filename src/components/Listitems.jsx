@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import Classtype from "./Classtype";
 import AddItem from "./AddItem";
+import Deletemenu from "./Deletemenu";
+import axios from "axios";
 
 const Listitems = ({ data, id, dlt }) => {
-
   const [list, setList] = useState(false);
-  const [menu, setmenu] = useState(false);
   const [additem, setaddItem] = useState(false);
+  const [items, setGetItem] = useState()
   const open = () => {
     setaddItem(true);
   };
+
+  const GetItemsData = () => {
+    axios.get(`http://192.168.1.5:8000/controlBoard/getItem/${id}`)
+     .then((res) => setGetItem(res.data.Data));
+  }
+
+  useEffect(() => {
+    GetItemsData()
+  },[additem])
 
   return (
     <div className="border m-4 rounded-lg ">
@@ -30,32 +39,20 @@ const Listitems = ({ data, id, dlt }) => {
         >
           <AiOutlinePlus className="mx-2" /> {data.title}
         </p>
-        <div className="relative">
-          <BsThreeDotsVertical
-            className="cursor-pointer text-2xl mx-3"
-            onClick={() => setmenu(!menu)}
-          />
-          <div
-            className={`${
-              menu ? "block" : "hidden"
-            } absolute bg-white py-1 left-3 m-2 text-sm shadow-md z-10`}
-          >  {/* delete menu */}
-            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 hover:text-white">
-              تعديل
-            </p>
-            <p
-              className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white"
-              onClick={() => dlt(id)}
-            >
-              مسح
-            </p>
-          </div>
-        </div>
+
+        {/* Delete Menu */}
+        <Deletemenu id={id} dlt={dlt} />
       </div>
+
       {list && (
         <div>
           <div className="bg-whitetext-xl p-2">
-            <Classtype />
+
+            {items?.map((one) => (
+              <Classtype item={one} />
+            ) )}
+              {/* Looooppppppppp */}
+
           </div>
           <button
             className="text-sm border rounded-full p-4 text-blue-500 flex justify-center m-4"
