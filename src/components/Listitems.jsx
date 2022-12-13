@@ -32,7 +32,7 @@ const Listitems = ({ data, dlt, dltItem , edit, setEdit}) => {
   console.log('loop');
   useEffect(() => {
     GetItemsData();
-  }, [additem, dltItem,editItem]);
+  },[additem, dltItem,editItem]);
 
   return (
     <div className="border m-4 rounded-lg font-semibold ">
