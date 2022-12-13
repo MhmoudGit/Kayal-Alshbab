@@ -4,8 +4,19 @@ import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
 import axios from "axios";
+import UpdateCategory from './UpdateCategory'
 
 const Listitems = ({ data, dlt, dltItem }) => {
+
+  // Updating category
+  const [edit, setEdit] = useState(false)
+  const Update = <UpdateCategory oldData={data} close={() => setEdit(false)} />
+  const opens = () => {
+    console.log('open category');
+    setEdit(true)
+  }
+// -----------------------------------------
+
   const [list, setList] = useState(false);
   const [additem, setaddItem] = useState(false);
   const [items, setGetItem] = useState()
@@ -42,7 +53,7 @@ const Listitems = ({ data, dlt, dltItem }) => {
         </p>
 
         {/* Delete Menu */}
-        <Deletemenu item={data} dlt={dlt} />
+        <Deletemenu item={data} dlt={dlt} editCat={edit} updateCategory={Update} open={opens}/>
       </div>
 
       {list && (

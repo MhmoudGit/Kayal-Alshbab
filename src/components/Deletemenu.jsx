@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const Deletemenu = ({ item, dlt, updateItem, edit, open}) => {
+const Deletemenu = ({ item, dlt, updateItem, updateCategory, editCat, edit, open,}) => {
   const [menu, setmenu] = useState(false);
 
 
   return (
     <div className="relative">
       {edit && updateItem}
+      {editCat && updateCategory}
       <BsThreeDotsVertical
         className="cursor-pointer text-2xl mx-3"
         onClick={() => setmenu(!menu)}
@@ -28,7 +29,7 @@ const Deletemenu = ({ item, dlt, updateItem, edit, open}) => {
           className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white"
           onClick={() => dlt(item._id)}
         >
-          مسح
+          حذف
         </p>
       </div>
     </div>
