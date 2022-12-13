@@ -8,11 +8,11 @@ function UpdateCategory({oldData, close}) {
   const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
-        var form = new FormData();
-        console.log(values)
-        form.append("title",values.categoryName);
-        form.append("image",values.categoryImage[0]);
-        axios.post("http://192.168.1.5:8000/controlboard/",form).then((res)=>{
+        // var form = new FormData();
+        // console.log(values)
+        // form.append("title",values.categoryName);
+        // form.append("image",values.categoryImage[0]);
+        axios.post(`http://192.168.1.5:8000/controlboard/updateCategory/${oldData._id}`,values).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();
@@ -32,12 +32,12 @@ return (
                 <form className="flex flex-col gap-5 w-full px-6 my-10" onSubmit={handleSubmit(onSubmit)} >
                     <div className="flex flex-col gap-4 w-full">
                         <label>اسم تصنيف</label>
-                        <input defaultValue={oldData.title} type="text" {...register("categoryName", {
+                        <input defaultValue={oldData.title} type="text" {...register("title", {
                         required:{ value: true, message: "هذا الحقل مطلوب" },
-                        })} className={`py-5 px-4 rounded-full border outline-none ${errors?.categoryName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
-                    {errors?.categoryName && (
+                        })} className={`py-5 px-4 rounded-full border outline-none ${errors?.title ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                    {errors?.title && (
                         <small className="text-red-500 text-xs">
-                            {errors?.categoryName.message}
+                            {errors?.title.message}
                         </small>
                         )}
                     </div>
@@ -53,7 +53,7 @@ return (
                                         </div>}
                                 <input id="dropzone" {...register("categoryImage",{
                                     onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
-                                    required:{ value: true, message: "هذا الحقل مطلوب" },
+                                    // required:{ value: true, message: "هذا الحقل مطلوب" },
                                     })} accept="image/*" type="file" class="hidden"/>
                             </label>
                         </div> 

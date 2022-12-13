@@ -11,15 +11,16 @@ function UpdateItem({oldData,close}) {
   const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
-        var form = new FormData();
+        // var formx = new FormData();
         console.log(values)
-        form.append("categoryId",oldData?.categoryId);
-        form.append("title",values.itemName);
-        form.append("price",values.price);
-        form.append("image",values.itemImage[0]);
-        form.append("description",values.description);
-        form.append("calories",values.calories);
-        axios.post("http://192.168.1.5:8000/controlboard/createItem",form).then((res)=>{
+        // formx.append("categoryId", oldData?.categoryId);
+        // formx.append("title", values.itemName);
+        // formx.append("price",values.price);
+        // // formx.append("image",values.itemImage[0]);
+        // formx.append("description",values.description);
+        // formx.append("calories",values.calories);
+        // console.log(values)
+        axios.post(`http://192.168.1.5:8000/controlboard/updateItem/${oldData._id}`, values).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();
@@ -40,12 +41,12 @@ function UpdateItem({oldData,close}) {
                 <div className="flex flex-col gap-10 w-full  overflow-y-auto px-6">
                     <div className="flex flex-col gap-2 w-full">
                         <label>اسم الصنف</label>
-                        <input defaultValue={oldData?.title} type="text" {...register("itemName", {
+                        <input defaultValue={oldData?.title} type="text" {...register("title", {
                             required:{ value: true, message: "هذا الحقل مطلوب" },
-                        })} className={`py-3 px-4 rounded-full border outline-none ${errors?.itemName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
-                        {errors?.itemName && (
+                        })} className={`py-3 px-4 rounded-full border outline-none ${errors?.title ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                        {errors?.title && (
                             <small className="text-red-500 text-xs pr-4">
-                                {errors?.itemName.message}
+                                {errors?.title.message}
                             </small>
                             )}
                     </div>
@@ -82,7 +83,7 @@ function UpdateItem({oldData,close}) {
                         </div>
                         <div className="flex flex-col justify-between w-full md:w-[50%]">
                             <div class="flex  items-center justify-center bg-logo w-full bg-contain bg-no-repeat bg-center ">
-                                <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.itemImage?"border-red-300":"border-gray-300"}`}>
+                                <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.image?"border-red-300":"border-gray-300"}`}>
                                     {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
                                         <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                                         <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
@@ -90,15 +91,15 @@ function UpdateItem({oldData,close}) {
                                     </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
                                         <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
                                         </div>}
-                                    <input  id="dropzone" {...register("itemImage",{
+                                    <input  id="dropzone" {...register("image",{
                                         onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
-                                        required:{ value: true, message: "هذا الحقل مطلوب" },
+                                        // required:{ value: true, message: "هذا الحقل مطلوب" },
                                         })} accept="image/*" type="file" class="hidden"/>
                                 </label>
                             </div> 
-                            {errors?.itemImage && (
+                            {errors?.image && (
                                 <small className="text-red-500 text-xs ">
-                                    {errors?.itemImage.message}
+                                    {errors?.image.message}
                                 </small>
                                 )}
                         </div>
