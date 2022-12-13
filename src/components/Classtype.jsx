@@ -15,7 +15,7 @@ const Classtype = ({ item, dltItem }) => {
       <Singleitem item={item} /> {/* Single items inside the class list */}
       <div className="flex flex-wrap-reverse gap-2">
         {/* toggle */}
-        <Toggle />
+        <Toggle status={item}/>
         {/* Delete Menu */}
         <Deletemenu
           dlt={dltItem}
