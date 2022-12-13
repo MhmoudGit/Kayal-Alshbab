@@ -5,11 +5,11 @@ import Toggle from "./Toggle";
 import UpdateItem from "./UpdateItem";
 
 const Classtype = ({ item, dltItem }) => {
-  const [edit, setEdit] = useState(false)
-  const Update = <UpdateItem oldData={item} close={() => setEdit(false) }/>
+  const [edit, setEdit] = useState(false);
+  const Update = <UpdateItem oldData={item} close={() => setEdit(false)} />;
   const open = () => {
-    setEdit(true)
-  }
+    setEdit(true);
+  };
 
   return (
     <div className="flex justify-between items-center p-3">
@@ -17,9 +17,14 @@ const Classtype = ({ item, dltItem }) => {
       <div className="flex gap-2">
         {/* toggle */}
         <Toggle />
-
         {/* Delete Menu */}
-        <Deletemenu dlt={dltItem} item={item} updateItem={Update} edit={edit} open={open}/>
+        <Deletemenu
+          dlt={dltItem}
+          item={item}
+          updateItem={Update}
+          edit={edit}
+          open={open}
+        />
       </div>
     </div>
   );
