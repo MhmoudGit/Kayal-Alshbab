@@ -10,11 +10,10 @@ const Classtype = ({ item, dltItem }) => {
   const open = () => {
     setEdit(true);
   };
-
   return (
-    <div className="flex justify-between items-center p-3">
+    <div className="flex justify-between items-center p-3 gap-2">
       <Singleitem item={item} /> {/* Single items inside the class list */}
-      <div className="flex gap-2">
+      <div className="flex flex-wrap-reverse gap-2">
         {/* toggle */}
         <Toggle />
         {/* Delete Menu */}
