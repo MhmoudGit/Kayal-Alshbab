@@ -8,19 +8,21 @@ import FormData from "form-data";
 
 function UpdateItem({oldData,close}) {
 
-  const [img,setimg]=useState("");
+  const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    let form = new FormData();
     const onSubmit = (values) => {
-        // var formx = new FormData();
-        console.log(values)
-        // formx.append("categoryId", oldData?.categoryId);
-        // formx.append("title", values.itemName);
-        // formx.append("price",values.price);
-        // // formx.append("image",values.itemImage[0]);
-        // formx.append("description",values.description);
-        // formx.append("calories",values.calories);
-        // console.log(values)
-        axios.post(`http://192.168.1.5:8000/controlboard/updateItem/${oldData._id}`, values).then((res)=>{
+        form.append("categoryId",oldData.categoryId);
+        form.append("title",values.title);
+        form.append("price",values.price);
+        form.append("description",values.description);
+        form.append("calories",values.calories);
+        if(values.image.length===0){
+            form.append("image",oldData.image)
+        }else if(values.image.length===1){
+            form.append("image",values.image[0])
+        }
+        axios.post(`http://192.168.1.5:8000/controlboard/updateItem/${oldData._id}`, form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();
@@ -28,6 +30,7 @@ function UpdateItem({oldData,close}) {
             }
         })
     };
+
   return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-2  bg-white py-10  shadow-xl w-full md:w-[80%] lg:w-[60%] fixed right-0 top-0 z-50 h-full ">
@@ -82,19 +85,19 @@ function UpdateItem({oldData,close}) {
                             </div>
                         </div>
                         <div className="flex flex-col justify-between w-full md:w-[50%]">
-                            <div class="flex  items-center justify-center bg-logo w-full bg-contain bg-no-repeat bg-center ">
-                                <label  class={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.image?"border-red-300":"border-gray-300"}`}>
-                                    {img===""?<div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                        <p class="mb-2 text-sm text-gray-900 "><span class="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
-                                        <p class="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                    </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
-                                        <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
+                            <div className="flex  items-center justify-center bg-logo w-full bg-contain bg-no-repeat bg-center ">
+                            <label  className={`overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-lg cursor-pointer ${errors?.itemImage?"border-red-300":"border-gray-300"}`}>
+                                {img===""?<div className="flex flex-col items-center justify-center pt-5 pb-6">
+                                    <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                    <p className="mb-2 text-sm text-gray-900 "><span className="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
+                                    <p className="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
+                                        <img src={img} alt="" className="w-[50%] m-auto" />
                                         </div>}
                                     <input  id="dropzone" {...register("image",{
                                         onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
                                         // required:{ value: true, message: "هذا الحقل مطلوب" },
-                                        })} accept="image/*" type="file" class="hidden"/>
+                                        })} accept="image/*" type="file" className="hidden"/>
                                 </label>
                             </div> 
                             {errors?.image && (
