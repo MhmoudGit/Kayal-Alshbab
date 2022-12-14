@@ -24,7 +24,7 @@ const qrCode = () => {
         <div className="flex items-center gap-2 p-3 rounded-lg border hover:bg-blue-300 duration-300">
             <input
               id="bordered-checkbox-1"
-              type="checkbox"
+              type="radio"
               value=""
               name="bordered-checkbox"
               className="w-4 h-4 text-blue-600 bg-gray-100 rounded-full"
@@ -39,7 +39,7 @@ const qrCode = () => {
           <div className="flex items-center gap-2 p-3 rounded-lg border hover:bg-blue-300 duration-300">
             <input
               id="bordered-checkbox-2"
-              type="checkbox"
+              type="radio"
               value=""
               name="bordered-checkbox"
               className="w-4 h-4 text-blue-600 bg-gray-100 rounded-full"
@@ -54,7 +54,7 @@ const qrCode = () => {
           <div className="flex items-center gap-2 p-3 rounded-lg border hover:bg-blue-300 duration-300">
             <input
               id="bordered-checkbox-3"
-              type="checkbox"
+              type="radio"
               value=""
               name="bordered-checkbox"
               className="w-4 h-4 text-blue-600 bg-gray-100 rounded-full"
