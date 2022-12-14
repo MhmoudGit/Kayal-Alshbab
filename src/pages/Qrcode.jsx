@@ -46,7 +46,7 @@ const qrCode = () => {
             />
             <label
               for="bordered-checkbox-2"
-              class="py-4 w-full text-lg font-bold cursor-pointer"
+              className="py-4 w-full text-lg font-bold cursor-pointer"
             >
               ﻣﻠﺼﻖ
             </label>
@@ -61,7 +61,7 @@ const qrCode = () => {
             />
             <label
               for="bordered-checkbox-3"
-              class="py-4 w-full text-lg font-bold cursor-pointer"
+              className="py-4 w-full text-lg font-bold cursor-pointer"
             >
               مطوية
             </label>
