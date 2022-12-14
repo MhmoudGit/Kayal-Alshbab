@@ -1,3 +1,5 @@
+import Button from "../components/Button";
+
 const qrCode = () => {
   return (
     <div className="lg:w-5/6">
@@ -12,6 +14,10 @@ const qrCode = () => {
           <div className="text-sm text-gray-400 flex gap-2">
             <p className="bg-sky-100 py-1 px-2 font-semibold text-gray-500 rounded-md">الرابط : kayalalshbab.com </p>
             <button className="text-blue-500 ">تعديل</button>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-2">
+          <button className="bg-blue-800 lg:p-3 lg:px-7 hover:bg-blue-900 duration-200 p-2 text-sm text-white rounded-full">تحميل الكيو ار كود</button>
+          <button className="border lg:p-3 lg:px-7 text-blue-900 duration-200 p-2 text-sm rounded-full">التوصيل / تصميم الكيو ار كود</button>
           </div>
       </div>
     </div>
