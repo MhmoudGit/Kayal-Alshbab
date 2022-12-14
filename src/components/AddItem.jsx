@@ -19,7 +19,7 @@ function AddItem({close,categoryId,closeAddItem}) {
         form.append("description",values.description);
         form.append("calories",values.calories);
 
-        axios.post("http://192.168.1.5:8000/controlboard/createItem",form).then((res)=>{
+        axios.post("http://192.168.1.6:8000/controlboard/createItem",form).then((res)=>{
             // console.log(res.data.success);
             if(res.data.success){
                 closeAddItem(res.data.success,res.data.message);

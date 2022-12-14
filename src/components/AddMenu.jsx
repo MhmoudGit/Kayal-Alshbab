@@ -16,7 +16,7 @@ function AddMenu({closeAddmenu ,close}) {
         form.append("title",values.categoryName);
         form.append("image",values.categoryImage[0]);
 
-        axios.post("http://192.168.1.5:8000/controlboard/createCategory",form).then((res)=>{
+        axios.post("http://192.168.1.6:8000/controlboard/createCategory",form).then((res)=>{
             console.log(res.data.message);
             if(res.data.success){
                 closeAddmenu(res.data.success,res.data.message);

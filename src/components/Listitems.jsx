@@ -30,7 +30,7 @@ const Listitems = ({ data, dlt, dltItem}) => {
 
   const GetItemsData = () => {
     axios
-      .get(`http://192.168.1.5:8000/controlBoard/getItem/${data._id}`)
+      .get(`http://192.168.1.6:8000/controlBoard/getItem/${data._id}`)
       .then((res) => setGetItem(res.data.Data));
   };
 

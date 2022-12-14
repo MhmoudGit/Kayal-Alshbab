@@ -16,19 +16,19 @@ const Menu = () => {
   };
   const fetchData = () => {
     axios
-      .get("http://192.168.1.5:8000/menu/getCategory")
+      .get("http://192.168.1.6:8000/menu/getCategory")
       .then((res) => setItems(res.data.Data));
   };
 
   const deleteData = (id) => {
-    axios.delete(`http://192.168.1.5:8000/controlBoard/deleteCategory/${id}`)
+    axios.delete(`http://192.168.1.6:8000/controlBoard/deleteCategory/${id}`)
         .then(res => (
           res.data.success && fetchData()
         ))
   }
 
   const deleteItem = (id) => {
-    axios.delete(`http://192.168.1.5:8000/controlBoard/deleteItem/${id}`)
+    axios.delete(`http://192.168.1.6:8000/controlBoard/deleteItem/${id}`)
         .then(res => (
           res.data.success && fetchData()
         ))
