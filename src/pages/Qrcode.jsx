@@ -46,7 +46,7 @@ const qrCode = () => {
             />
             <label
               for="bordered-checkbox-2"
-              class="py-4 w-full text-lg font-bold cursor-pointer"
+              className="py-4 w-full text-lg font-bold cursor-pointer"
             >
               ﻣﻠﺼﻖ
             </label>
@@ -61,7 +61,7 @@ const qrCode = () => {
             />
             <label
               for="bordered-checkbox-3"
-              class="py-4 w-full text-lg font-bold cursor-pointer"
+              className="py-4 w-full text-lg font-bold cursor-pointer"
             >
               مطوية
             </label>
@@ -74,9 +74,6 @@ const qrCode = () => {
         <div className="flex flex-col lg:flex-row gap-2">
           <button className="bg-blue-800 lg:p-3 lg:px-7 hover:bg-blue-900 duration-200 p-2 text-sm text-white rounded-full">
             تحميل الكيو ار كود
-          </button>
-          <button className="border hover:bg-blue-300 duration-300 lg:p-3 lg:px-7 text-blue-900 duration-200 p-2 text-sm rounded-full">
-            التوصيل / تصميم الكيو ار كود
           </button>
         </div>
       </div>
