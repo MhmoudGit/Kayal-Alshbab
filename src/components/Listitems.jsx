@@ -29,7 +29,6 @@ const Listitems = ({ data, dlt, dltItem , edit, setEdit}) => {
       .then((res) => setGetItem(res.data.Data));
   };
 
-  console.log('loop');
   useEffect(() => {
     GetItemsData();
   },[additem, dltItem,editItem]);
