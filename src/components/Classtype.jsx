@@ -6,16 +6,16 @@ import Singleitem from "./Singleitem";
 import Toggle from "./Toggle";
 import UpdateItem from "./UpdateItem";
 
-const Classtype = ({ item, dltItem ,setEnd}) => {
+const Classtype = ({ item, dltItem ,setEndItem}) => {
   const [editItem, setEditItem] = useState(false);
   // const location = useLocation();
   const Update = <UpdateItem oldData={item} close={() =>{
     setEditItem(false)
-    setEnd(false)
+    setEndItem(false)
   }} />;
   const open = () => {
     setEditItem(true);
-    setEnd(true);
+    setEndItem(true);
   };
   
   return (

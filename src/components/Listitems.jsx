@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
   // Updating category
   const [edit, setEdit] = useState(false);
-  const [end, setEnd] = useState();
+  const [endItem, setEndItem] = useState();
 
   const Update = <UpdateCategory oldData={data} close={() => {
     setEdit(false);
@@ -41,7 +41,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
 
   useEffect(() => {
     GetItemsData();
-  },[additem, dltItem,end]);
+  },[additem, dltItem,endItem]);
 
   const closeAddItem = (s,m)=>{
     if (s===true) {
@@ -104,7 +104,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
         <div>
           <div className="bg-whitetext-xl p-2 font-semibold">
             {items?.map((one, i) => (
-              <Classtype item={one} dltItem={dltItem} key={i}  setEnd={setEnd} />
+              <Classtype item={one} dltItem={dltItem} key={i}  setEndItem={setEndItem} />
             ))}
             {/* Looooppppppppp */}
           </div>
