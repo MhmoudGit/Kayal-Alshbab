@@ -4,7 +4,8 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
 
-function AddMenu({close}) {
+
+function AddMenu({closeAddmenu ,close}) {
     const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
@@ -13,10 +14,11 @@ function AddMenu({close}) {
         form.append("title",values.categoryName);
         form.append("image",values.categoryImage[0]);
         axios.post("http://192.168.1.5:8000/controlboard/createCategory",form).then((res)=>{
-            console.log(res.data.success);
+            console.log(res.data.message);
             if(res.data.success){
-                close();
+                closeAddmenu(res.data.success,res.data.message);
             }else{
+                closeAddmenu(res.data.success,res.data.message);
             }
         })
     };
@@ -24,19 +26,19 @@ return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-4  bg-white py-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">
                 <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none px-5 "
-                onClick={close}
+                onClick={()=>close()}
                 >
                     <AiOutlineArrowRight/> 
                     <h1>إضافة تصنيف</h1>
                 </button>
-                <form className="flex flex-col gap-5 w-full px-6 my-10" onSubmit={handleSubmit(onSubmit)} >
+                <form className="flex flex-col gap-5 w-full px-6 my-10 font-semibold text-xl " onSubmit={handleSubmit(onSubmit)} >
                     <div className="flex flex-col gap-4 w-full">
                         <label>اسم تصنيف</label>
                         <input type="text" {...register("categoryName", {
                         required:{ value: true, message: "هذا الحقل مطلوب" },
-                        })} className={`py-5 px-4 rounded-full border outline-none ${errors?.categoryName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                        })} className={`py-5 px-4 rounded-full border outline-none  ${errors?.categoryName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                     {errors?.categoryName && (
-                        <small className="text-red-500 text-xs">
+                        <small className="text-red-500 text-xs pr-4">
                             {errors?.categoryName.message}
                         </small>
                         )}
@@ -49,7 +51,7 @@ return (
                                     <p className="mb-2 text-sm text-gray-900 "><span className="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
                                     <p className="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                 </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
-                                        <img src={img} alt="" srcset="" className="w-[50%] m-auto" />
+                                        <img src={img} alt=""  className="w-[50%] m-auto" />
                                         </div>}
                                 <input id="dropzone" {...register("categoryImage",{
                                     onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
@@ -64,8 +66,8 @@ return (
                             )}
                     </div>
                     <div className="flex justify-end gap-3 items-center">
-                        <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={close}>تجاهل</button>
-                        <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white p-4 rounded-full"/>
+                        <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={()=>closeAddmenu(false,"تم تجاهل اضافه تصنيف")}>تجاهل</button>
+                        <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white p-4 rounded-full cursor-pointer"/>
                     </div>
                 </form>
         </div>

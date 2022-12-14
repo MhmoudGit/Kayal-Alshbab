@@ -3,23 +3,26 @@ import { useForm } from "react-hook-form";
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
-function AddItem({close,categoryId}) {
+
+function AddItem({close,categoryId,closeAddItem}) {
     const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => {
         var form = new FormData();
-        console.log(values)
+        // console.log(values)
         form.append("categoryId",categoryId);
         form.append("title",values.itemName);
         form.append("price",values.price);
         form.append("image",values.itemImage[0]);
         form.append("description",values.description);
         form.append("calories",values.calories);
+
         axios.post("http://192.168.1.5:8000/controlboard/createItem",form).then((res)=>{
-            console.log(res.data.success);
+            // console.log(res.data.success);
             if(res.data.success){
-                close();
+                closeAddItem(res.data.success,res.data.message);
             }else{
+                closeAddItem(res.data.success,res.data.message);
             }
         })
     };
@@ -32,7 +35,7 @@ return (
                 <AiOutlineArrowRight/> 
                 <h1>إضافة صنف</h1>
             </button>
-            <form className="flex flex-col justify-between gap-5 w-full mt-10 overflow-hidden px-6 h-full" onSubmit={handleSubmit(onSubmit)} >
+            <form className="flex flex-col justify-between gap-5 w-full mt-10 overflow-hidden px-6 h-full font-semibold text-xl" onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-10 w-full  overflow-y-auto px-6">
                     <div className="flex flex-col gap-2 w-full">
                         <label>اسم الصنف</label>
@@ -84,7 +87,7 @@ return (
                                     <p className="mb-2 text-sm text-gray-900 "><span className="font-semibold">اسحب الصورة هنا </span> أو اضغط لتصفح الملفات</p>
                                     <p className="text-xs text-gray-900 ">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                 </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
-                                        <img src={img} alt=""  className="w-[50%] m-auto" />
+                                        <img src={img} alt="" className="w-[50%] m-auto" />
                                         </div>}
                                     <input id="dropzone" {...register("itemImage",{
                                         onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
@@ -111,7 +114,7 @@ return (
                     </div>
                 </div>
                 <div className="flex justify-end gap-3 items-center">
-                    <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={close}>تجاهل</button>
+                    <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={()=>closeAddItem(false,"تم تجاهل اضافه تصنيف")}>تجاهل</button>
                     <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white py-2 rounded-full"/>
                 </div>
             </form>

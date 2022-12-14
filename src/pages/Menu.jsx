@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import AddMenu from "../components/AddMenu";
 import Button from "../components/Button";
 import Listitems from "../components/Listitems";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Menu = () => {
   const [addMenu, setaddMenu] = useState(false);
@@ -32,20 +34,46 @@ const Menu = () => {
         ))
   }
   
+  const closeAddmenu = (s,m)=>{
+    if (s===true) {
+      toast.success(m, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }else{
+      toast.error(m, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+    setaddMenu(false);
+  }
 
   useEffect(() => {
     fetchData();
   }, [addMenu, edit ]);
 
   return (
-    <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
+    <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto">
       {addMenu && (
         <AddMenu
-          close={() => {
-            setaddMenu(false);
-          }}
+          closeAddmenu={closeAddmenu}
+          close={()=> setaddMenu(false)}
         />
       )}
+      <ToastContainer />
       {/* <AddMenu/> */}
       <hr className="hidden lg:block lg:my-10" />
       <div className="py-2 px-3 lg:px-10 lg:mt-11">

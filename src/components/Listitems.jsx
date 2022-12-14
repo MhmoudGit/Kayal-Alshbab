@@ -5,6 +5,9 @@ import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
 import axios from "axios";
 import UpdateCategory from "./UpdateCategory";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Listitems = ({ data, dlt, dltItem , edit, setEdit}) => {
   // Updating category
@@ -29,21 +32,49 @@ const Listitems = ({ data, dlt, dltItem , edit, setEdit}) => {
       .then((res) => setGetItem(res.data.Data));
   };
 
-  console.log('loop');
   useEffect(() => {
     GetItemsData();
   },[additem, dltItem,editItem]);
+
+  const closeAddItem = (s,m)=>{
+    if (s===true) {
+      toast.success(m, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }else{
+      toast.error(m, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+    setAddItem(false);
+  }
 
   return (
     <div className="border m-4 rounded-lg font-semibold ">
       {additem && (
         <AddItem
+          closeAddItem={closeAddItem}
           close={() => {
             setAddItem(false);
           }}
           categoryId={data._id}
         />
       )}
+      <ToastContainer />
       <div className="flex items-center">
         <p
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
