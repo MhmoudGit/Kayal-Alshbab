@@ -1,16 +1,21 @@
 
 import { useState } from "react";
+// import { useLocation } from "react-router-dom";
 import Deletemenu from "./Deletemenu";
 import Singleitem from "./Singleitem";
 import Toggle from "./Toggle";
 import UpdateItem from "./UpdateItem";
 
-const Classtype = ({ item, dltItem}) => {
+const Classtype = ({ item, dltItem ,setEnd}) => {
   const [editItem, setEditItem] = useState(false);
-
-  const Update = <UpdateItem oldData={item} close={() => setEditItem(false)} />;
+  // const location = useLocation();
+  const Update = <UpdateItem oldData={item} close={() =>{
+    setEditItem(false)
+    setEnd(false)
+  }} />;
   const open = () => {
     setEditItem(true);
+    setEnd(true);
   };
   
   return (

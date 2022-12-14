@@ -61,9 +61,11 @@ const Menu = () => {
     setaddMenu(false);
   }
 
+  const [endCategory, setEndCategory] = useState();
+
   useEffect(() => {
     fetchData();
-  }, [addMenu]);
+  }, [addMenu,endCategory]);
 
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto">
@@ -88,7 +90,7 @@ const Menu = () => {
         <div className="shadow-sm my-3 lg:p-5 lg:mx-3 text-xl bg-white">
           <p className="bg-white text-xl py-7 px-5 border-b font-semibold">تصنيف</p>
           {items?.map((data) => (
-            <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} />
+            <Listitems data={data} key={data._id} dlt={deleteData} dltItem={deleteItem} setEndCategory={setEndCategory} />
           ))}
           {/*list items*/}
           <Button name="اضف تصنيف" fun={open} />
