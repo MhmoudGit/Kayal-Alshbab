@@ -75,9 +75,6 @@ const qrCode = () => {
           <button className="bg-blue-800 lg:p-3 lg:px-7 hover:bg-blue-900 duration-200 p-2 text-sm text-white rounded-full">
             تحميل الكيو ار كود
           </button>
-          <button className="border hover:bg-blue-300 duration-300 lg:p-3 lg:px-7 text-blue-900 duration-200 p-2 text-sm rounded-full">
-            التوصيل / تصميم الكيو ار كود
-          </button>
         </div>
       </div>
     </div>
