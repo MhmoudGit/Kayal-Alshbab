@@ -1,21 +1,22 @@
 import axios from "axios";
 
-const Toggle = ({status}) => {
-
+const Toggle = ({ status }) => {
   const toggle = () => {
-    axios.post(`http://192.168.1.5:8000/controlBoard/updateItemStatus/${status._id}`,{})
-         .then(res => console.log(res.data.success))
-  }
+    axios
+      .post(
+        `http://192.168.1.5:8000/controlBoard/updateItemStatus/${status._id}`,
+        {}
+      )
+      .then((res) => res.data.success);
+  };
 
   const sts = () => {
-    if(status.status === 'active'){
-      console.log('true');
-      return true
+    if (status.status === "active") {
+      return true;
     } else {
-      console.log('false');
-      return false
+      return false;
     }
-  }
+  };
 
   return (
     <label className="flex relative items-center cursor-pointer">
