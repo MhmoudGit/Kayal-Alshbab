@@ -6,13 +6,16 @@ import FormData from "form-data";
 
 
 function AddMenu({closeAddmenu ,close}) {
+
     const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = (values) => {
         var form = new FormData();
-        console.log(values)
+
         form.append("title",values.categoryName);
         form.append("image",values.categoryImage[0]);
+
         axios.post("http://192.168.1.5:8000/controlboard/createCategory",form).then((res)=>{
             console.log(res.data.message);
             if(res.data.success){
@@ -22,6 +25,7 @@ function AddMenu({closeAddmenu ,close}) {
             }
         })
     };
+
 return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-4  bg-white py-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">

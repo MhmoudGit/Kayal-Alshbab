@@ -8,9 +8,12 @@ import FormData from "form-data";
 
 function UpdateItem({oldData,close}) {
 
-  const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
+    const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     let form = new FormData();
+
     const onSubmit = (values) => {
         form.append("categoryId",oldData.categoryId);
         form.append("title",values.title);
@@ -31,7 +34,7 @@ function UpdateItem({oldData,close}) {
         })
     };
 
-  return (
+return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-2  bg-white py-10  shadow-xl w-full md:w-[80%] lg:w-[60%] fixed right-0 top-0 z-50 h-full ">
             <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none px-5"

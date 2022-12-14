@@ -5,11 +5,15 @@ import axios from 'axios';
 import FormData from "form-data";
 
 function UpdateCategory({oldData, close}) {
-  const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
+
+    const [img,setimg]=useState(`http://192.168.1.5:8000/${oldData.image}`);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    let form = new FormData();
+
     const onSubmit = (values) => {
-        let form = new FormData();
-        console.log(values.image[0])
+        
         if(values.image.length===0){
             form.append("image",oldData.image)
             form.append("title",values.title)
@@ -17,7 +21,6 @@ function UpdateCategory({oldData, close}) {
             form.append("image",values.image[0])
             form.append("title",values.title)
         }
-        console.log(values.image)
         axios.post(`http://192.168.1.5:8000/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
@@ -26,6 +29,7 @@ function UpdateCategory({oldData, close}) {
             }
         })
     };
+
 return (
     <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-4  bg-white py-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">

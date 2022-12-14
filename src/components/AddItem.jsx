@@ -5,8 +5,10 @@ import axios from 'axios';
 import FormData from "form-data";
 
 function AddItem({close,categoryId,closeAddItem}) {
+    
     const [img,setimg]=useState("");
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = (values) => {
         var form = new FormData();
         // console.log(values)
@@ -26,6 +28,7 @@ function AddItem({close,categoryId,closeAddItem}) {
             }
         })
     };
+
 return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-2  bg-white py-10  shadow-xl w-full md:w-[80%] lg:w-[60%] fixed right-0 top-0 z-50 h-full ">
