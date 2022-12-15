@@ -12,9 +12,14 @@ const QrCode = () => {
     const ctx = canvas.getContext("2d");
     const img = new Image();
     img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      canvas.width = img.height + 100;
+      canvas.height = img.height + 100;
+
+      ctx.beginPath();
+      ctx.rect(0, 0, img.height + 100, img.height + 100);
+      ctx.fillStyle = "white";
+      ctx.fill();
+      ctx.drawImage(img, 50, 50);
       const pngFile = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
       downloadLink.download = "QRCode";
