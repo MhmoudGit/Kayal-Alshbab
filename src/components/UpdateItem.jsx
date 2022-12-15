@@ -8,7 +8,7 @@ import FormData from "form-data";
 
 function UpdateItem({oldData,close}) {
 
-    const [img,setimg]=useState(`http://192.168.1.6:8000/${oldData.image}`);
+    const [img,setimg]=useState(`http://192.168.1.2:8000/${oldData.image}`);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -25,7 +25,7 @@ function UpdateItem({oldData,close}) {
         }else if(values.image.length===1){
             form.append("image",values.image[0])
         }
-        axios.post(`http://192.168.1.6:8000/controlboard/updateItem/${oldData._id}`, form).then((res)=>{
+        axios.post(`http://192.168.1.2:8000/controlboard/updateItem/${oldData._id}`, form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();

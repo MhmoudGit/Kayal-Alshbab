@@ -6,7 +6,7 @@ import FormData from "form-data";
 
 function UpdateCategory({oldData, close}) {
 
-    const [img,setimg]=useState(`http://192.168.1.6:8000/${oldData.image}`);
+    const [img,setimg]=useState(`http://192.168.1.2:8000/${oldData.image}`);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -21,7 +21,7 @@ function UpdateCategory({oldData, close}) {
             form.append("image",values.image[0])
             form.append("title",values.title)
         }
-        axios.post(`http://192.168.1.6:8000/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
+        axios.post(`http://192.168.1.2:8000/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
             console.log(res.data.success);
             if(res.data.success){
                 close();

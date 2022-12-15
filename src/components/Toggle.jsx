@@ -4,7 +4,7 @@ const Toggle = ({ status }) => {
   const toggle = () => {
     axios
       .post(
-        `http://192.168.1.6:8000/controlBoard/updateItemStatus/${status._id}`,
+        `http://192.168.1.2:8000/controlBoard/updateItemStatus/${status._id}`,
         {}
       )
       .then((res) => res.data.success);

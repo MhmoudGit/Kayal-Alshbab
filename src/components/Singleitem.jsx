@@ -3,7 +3,7 @@ const Singleitem = ({item}) => {
   return (
     <div className="flex gap-5">
       <img
-        src={`http://192.168.1.6:8000/${item.image}`}
+        src={`http://192.168.1.2:8000/${item.image}`}
         alt="img"
         className="w-16 rounded-md h-16"
       />
