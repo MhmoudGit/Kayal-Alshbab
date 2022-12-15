@@ -5,6 +5,25 @@ const QrCode = () => {
   const [editLink, setEditLink] = useState("www.google.com");
   const [enableWriting, setEnableWriting] = useState(true);
 
+  const onImageDownload = () => {
+    const svg = document.getElementById("QRCode");
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const pngFile = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.download = "QRCode";
+      downloadLink.href = `${pngFile}`;
+      downloadLink.click();
+    };
+    img.src = `data:image/svg+xml;base64,${btoa(svgData)}`;
+  };
+
   return (
     <div className="lg:w-5/6">
       <hr className="hidden lg:block lg:my-10" />
@@ -87,11 +106,15 @@ const QrCode = () => {
             value={editLink}
             className="flex justify-center items-center w-1/2"
             renderas="svg"
+            id="QRCode"
           />
         </div>
 
         <div className="flex flex-col lg:flex-row gap-2">
-          <button className="bg-blue-800 lg:p-3 lg:px-7 hover:bg-blue-900 duration-200 p-2 text-sm text-white rounded-full">
+          <button
+            onClick={() => onImageDownload()}
+            className="bg-blue-800 lg:p-3 lg:px-7 hover:bg-blue-900 duration-200 p-2 text-sm text-white rounded-full"
+          >
             تحميل الكيو ار كود
           </button>
         </div>
