@@ -4,7 +4,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
 
-function UpdateCategory({oldData, close}) {
+function UpdateCategory({oldData, close,closeEditCategory}) {
 
     const [img,setimg]=useState(`http://192.168.1.2:8000/${oldData.image}`);
 
@@ -22,10 +22,10 @@ function UpdateCategory({oldData, close}) {
             form.append("title",values.title)
         }
         axios.post(`http://192.168.1.2:8000/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
-            console.log(res.data.success);
             if(res.data.success){
-                close();
+                closeEditCategory(res.data.success,res.data.message);
             }else{
+                closeEditCategory(res.data.success,res.data.message);
             }
         })
     };

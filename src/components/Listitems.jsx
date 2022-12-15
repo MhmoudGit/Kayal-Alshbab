@@ -14,40 +14,11 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
   const [edit, setEdit] = useState(false);
   const [endItem, setEndItem] = useState();
 
-  const Update = <UpdateCategory oldData={data} close={() => {
-    setEdit(false);
-    setEndCategory(false);
-  }} />;
-  const opens = () => {
-    setEdit(true);
-    setEndCategory(true)
-  };
-  // -----------------------------------------
-
-  const [list, setList] = useState(false);
-  const [additem, setAddItem] = useState(false);
-  const [items, setGetItem] = useState();
-  const open = () => {
-    setAddItem(true);
-  };
-
-  
-
-  const GetItemsData = () => {
-    axios
-      .get(`http://192.168.1.2:8000/controlBoard/getItem/${data._id}`)
-      .then((res) => setGetItem(res.data.Data));
-  };
-
-  useEffect(() => {
-    GetItemsData();
-  },[additem, dltItem,endItem]);
-
-  const closeAddItem = (s,m)=>{
-    if (s===true) {
-      toast.success(m, {
+  const toastopen =(success,message)=>{
+    if (success===true) {
+      toast.info(message, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -56,9 +27,9 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
         theme: "colored",
       });
     }else{
-      toast.error(m, {
+      toast.error(message, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -67,10 +38,49 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
         theme: "colored",
       });
     }
+  }
+
+  const openEditCategory = () => {
+    setEdit(true);
+    setEndCategory(true)
+  };
+
+  const closeEditCategory = (success,message)=>{
+    toastopen(success,message);
+    setEdit(false);
+    setEndCategory(false);
+  }
+
+  const Update = <UpdateCategory oldData={data} close={() => {
+    setEdit(false);
+    setEndCategory(false);
+  }} closeEditCategory={closeEditCategory} />;
+  // -----------------------------------------
+
+  const [list, setList] = useState(false);
+  const [additem, setAddItem] = useState(false);
+  const [items, setGetItem] = useState();
+
+  const GetItemsData = () => {
+    axios
+      .get(`http://192.168.1.2:8000/controlBoard/getItem/${data._id}`)
+      .then((res) => setGetItem(res.data.Data));
+  };
+
+  const open = () => {
+    setAddItem(true);
+  };
+
+  const closeAddItem = (success,message)=>{
+    toastopen(success,message);
     setAddItem(false);
   }
 
-  return (
+  useEffect(() => {
+    GetItemsData();
+  },[additem, dltItem,endItem]);
+
+return (
     <div className="border m-4 rounded-lg font-semibold ">
       {additem && (
         <AddItem
@@ -81,7 +91,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
           categoryId={data._id}
         />
       )}
-      <ToastContainer />
+      <ToastContainer className='text-base font-semibold' />
       <div className="flex items-center">
         <p
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
@@ -96,7 +106,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
           dlt={dlt}
           editCat={edit}
           updateCategory={Update}
-          open={opens}
+          open={openEditCategory}
         />
       </div>
 

@@ -9,36 +9,23 @@ import 'react-toastify/dist/ReactToastify.css';
 const Menu = () => {
   const [addMenu, setaddMenu] = useState(false);
   const [items, setItems] = useState();
-  
+  const [endCategory, setEndCategory] = useState();
 
   const open = () => {
     setaddMenu(true);
   };
+
   const fetchData = () => {
     axios
       .get("http://192.168.1.2:8000/menu/getCategory")
       .then((res) => setItems(res.data.Data));
   };
 
-  const deleteData = (id) => {
-    axios.delete(`http://192.168.1.2:8000/controlBoard/deleteCategory/${id}`)
-        .then(res => (
-          res.data.success && fetchData()
-        ))
-  }
-
-  const deleteItem = (id) => {
-    axios.delete(`http://192.168.1.2:8000/controlBoard/deleteItem/${id}`)
-        .then(res => (
-          res.data.success && fetchData()
-        ))
-  }
-  
-  const closeAddmenu = (s,m)=>{
-    if (s===true) {
-      toast.success(m, {
+  const toastopen =(success,message)=>{
+    if (success===true) {
+      toast.info(message, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -47,9 +34,9 @@ const Menu = () => {
         theme: "colored",
       });
     }else{
-      toast.error(m, {
+      toast.error(message, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -58,10 +45,28 @@ const Menu = () => {
         theme: "colored",
       });
     }
-    setaddMenu(false);
   }
 
-  const [endCategory, setEndCategory] = useState();
+  const deleteData = (id) => {
+    axios.delete(`http://192.168.1.2:8000/controlBoard/deleteCategory/${id}`)
+        .then(res => {
+          toastopen(res.data.success,res.data.message);
+          fetchData();
+        })
+  }
+
+  const deleteItem = (id) => {
+    axios.delete(`http://192.168.1.2:8000/controlBoard/deleteItem/${id}`)
+        .then(res => {
+          toastopen(res.data.success,res.data.message);
+          fetchData();
+        })
+  }
+  
+  const closeAddmenu = (s,m)=>{
+    toastopen(s,m);
+    setaddMenu(false);
+  }
 
   useEffect(() => {
     fetchData();
@@ -75,7 +80,7 @@ const Menu = () => {
           close={()=> setaddMenu(false)}
         />
       )}
-      <ToastContainer />
+      <ToastContainer className='text-base font-semibold' />
       {/* <AddMenu/> */}
       <hr className="hidden lg:block lg:my-10" />
       <div className="py-2 px-3 lg:px-10 lg:mt-11">

@@ -11,7 +11,6 @@ function AddItem({close,categoryId,closeAddItem}) {
 
     const onSubmit = (values) => {
         var form = new FormData();
-        // console.log(values)
         form.append("categoryId",categoryId);
         form.append("title",values.itemName);
         form.append("price",values.price);
@@ -20,7 +19,6 @@ function AddItem({close,categoryId,closeAddItem}) {
         form.append("calories",values.calories);
 
         axios.post("http://192.168.1.2:8000/controlboard/createItem",form).then((res)=>{
-            // console.log(res.data.success);
             if(res.data.success){
                 closeAddItem(res.data.success,res.data.message);
             }else{
