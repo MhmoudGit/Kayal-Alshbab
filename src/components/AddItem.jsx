@@ -18,7 +18,7 @@ function AddItem({close,categoryId,closeAddItem}) {
         form.append("description",values.description);
         form.append("calories",values.calories);
 
-        axios.post("http://192.168.1.2:8000/controlboard/createItem",form).then((res)=>{
+        axios.post("https://kayal-api.onrender.com/controlboard/createItem",form).then((res)=>{
             if(res.data.success){
                 closeAddItem(res.data.success,res.data.message);
             }else{

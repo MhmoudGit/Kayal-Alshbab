@@ -63,7 +63,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
 
   const GetItemsData = () => {
     axios
-      .get(`http://192.168.1.2:8000/controlBoard/getItem/${data._id}`)
+      .get(`https://kayal-api.onrender.com/controlBoard/getItem/${data._id}`)
       .then((res) => setGetItem(res.data.Data));
   };
 

@@ -4,7 +4,7 @@ const Toggle = ({ status }) => {
   const toggle = () => {
     axios
       .post(
-        `http://192.168.1.2:8000/controlBoard/updateItemStatus/${status._id}`,
+        `https://kayal-api.onrender.com/controlBoard/updateItemStatus/${status._id}`,
         {}
       )
       .then((res) => res.data.success);

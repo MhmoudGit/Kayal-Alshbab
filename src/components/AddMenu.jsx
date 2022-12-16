@@ -16,7 +16,7 @@ function AddMenu({closeAddmenu ,close}) {
         form.append("title",values.categoryName);
         form.append("image",values.categoryImage[0]);
 
-        axios.post("http://192.168.1.2:8000/controlboard/createCategory",form).then((res)=>{
+        axios.post("https://kayal-api.onrender.com/controlboard/createCategory",form).then((res)=>{
             if(res.data.success){
                 closeAddmenu(res.data.success,res.data.message);
             }else{
