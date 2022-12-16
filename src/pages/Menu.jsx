@@ -17,7 +17,7 @@ const Menu = () => {
 
   const fetchData = () => {
     axios
-      .get("https://kayalalshbab-api-node.vercel.app/menu/getCategory")
+      .get("https://kayal-api.onrender.com/menu/getCategory")
       .then((res) => setItems(res.data.Data));
   };
 
@@ -48,7 +48,7 @@ const Menu = () => {
   }
 
   const deleteData = (id) => {
-    axios.delete(`https://kayalalshbab-api-node.vercel.app/controlBoard/deleteCategory/${id}`)
+    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteCategory/${id}`)
         .then(res => {
           toastopen(res.data.success,res.data.message);
           fetchData();
@@ -56,7 +56,7 @@ const Menu = () => {
   }
 
   const deleteItem = (id) => {
-    axios.delete(`https://kayalalshbab-api-node.vercel.app/controlBoard/deleteItem/${id}`)
+    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteItem/${id}`)
         .then(res => {
           toastopen(res.data.success,res.data.message);
           fetchData();
