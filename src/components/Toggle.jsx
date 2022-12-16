@@ -4,7 +4,7 @@ const Toggle = ({ status }) => {
   const toggle = () => {
     axios
       .post(
-        `https://kayal-api.onrender.com/controlBoard/updateItemStatus/${status._id}`,
+        `https://kayalalshbab-api-node.vercel.app/controlBoard/updateItemStatus/${status._id}`,
         {}
       )
       .then((res) => res.data.success);
