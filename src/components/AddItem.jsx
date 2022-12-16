@@ -116,7 +116,7 @@ return (
                 </div>
                 <div className="flex justify-end gap-3 items-center">
                     <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={()=>closeAddItem(false,"تم تجاهل اضافه تصنيف")}>تجاهل</button>
-                    <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white py-2 rounded-full"/>
+                    <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white py-2 rounded-full cursor-pointer"/>
                 </div>
             </form>
         </div>
