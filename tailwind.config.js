@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        SFDisplay: ["SF Pro Display", "sans-serif"],
+        sfpro: ["sfpro", "sans-serif"],
       },
       backgroundImage: {
         logo: "url('/src/img/logo.png')",
