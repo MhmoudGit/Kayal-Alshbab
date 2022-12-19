@@ -1,42 +1,69 @@
+
 import { useState } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { toast, ToastContainer } from "react-toastify";
+// import { useLocation } from "react-router-dom";
+import Deletemenu from "./Deletemenu";
+import Singleitem from "./Singleitem";
+import Toggle from "./Toggle";
+import UpdateItem from "./UpdateItem";
 
-const Classtype = () => {
-  const [menu, setmenu] = useState(false);
+const Classtype = ({ item, dltItem ,setEndItem}) => {
+  const [editItem, setEditItem] = useState(false);
+  // const location = useLocation();
+  const toastopen =(success,message)=>{
+    if (success===true) {
+      toast.info(message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }else{
+      toast.error(message, {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  }
+  const closeEditCategory = (success,message)=>{
+    toastopen(success,message);
+    setEditItem(false);
+    setEndItem(false);
+  }
+  const openEditItem = () => {
+    setEditItem(true);
+    setEndItem(true);
+  };
 
+  const Update = <UpdateItem oldData={item} close={() =>{
+    setEditItem(false)
+    setEndItem(false)
+  }}  closeEditCategory={closeEditCategory}/>;
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex gap-5">
-        <img
-          src="https://i.pinimg.com/originals/3a/69/ae/3a69ae3942d4a9da6c3cbc93b1c8f051.jpg"
-          alt="img"
-          className="w-16"
+    <div className="flex justify-between items-center p-3 gap-2">
+      <Singleitem item={item} /> {/* Single items inside the class list */}
+      <ToastContainer className='text-base font-semibold' />
+      <div className="flex flex-wrap-reverse gap-2">
+        {/* toggle */}
+        <Toggle status={item}/>
+        {/* Delete Menu */}
+        <Deletemenu
+          dlt={dltItem}
+          item={item}
+          updateItem={Update}
+          edit={editItem}
+          open={openEditItem}
         />
-        <div>
-          <p>اسم</p>
-          <p>سعر</p>
-        </div>
-      </div>
-      <div className="flex gap-2">
-        <button>toggle</button>
-        <div className="relative">
-          <BsThreeDotsVertical
-            className="cursor-pointer text-2xl mx-3"
-            onClick={() => setmenu(!menu)}
-          />
-          <div
-            className={`${
-              menu ? "block" : "hidden"
-            } absolute bg-white py-1 left-3 m-2 text-sm shadow-md z-10`}
-          >
-            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 hover:text-white">
-              تعديل
-            </p>
-            <p className="p-2 px-6 cursor-pointer hover:bg-blue-800 text-red-600 hover:text-white">
-              مسح
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const Dashboard = () => {
           لوحة التحكم
         </h1>
         <div className="my-2 border-b">
-          <p className="text-lg py-4 mx-3 text-blue-500 w-fit border-b-2 border-blue-500">
+          <p className="text-lg py-4 mx-3 text-blue-500 w-fit border-b-2 border-blue-500 font-semibold">
             أداء المطعم
           </p>
         </div>

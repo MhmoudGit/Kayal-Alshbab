@@ -4,25 +4,32 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
 
-function AddItem({close,categoryId,closeAddItem}) {
-    
-    const [img,setimg]=useState("");
+
+
+function UpdateItem({oldData,close,closeEditCategory}) {
+
+    const [img,setimg]=useState(`https://kayal-api.onrender.com/${oldData.image}`);
+
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    let form = new FormData();
+
     const onSubmit = (values) => {
-        var form = new FormData();
-        form.append("categoryId",categoryId);
-        form.append("title",values.itemName);
+        form.append("categoryId",oldData.categoryId);
+        form.append("title",values.title);
         form.append("price",values.price);
-        form.append("image",values.itemImage[0]);
         form.append("description",values.description);
         form.append("calories",values.calories);
-
-        axios.post("https://kayal-api.onrender.com/controlboard/createItem",form).then((res)=>{
+        if(values.image.length===0){
+            form.append("image",oldData.image)
+        }else if(values.image.length===1){
+            form.append("image",values.image[0])
+        }
+        axios.post(`https://kayal-api.onrender.com/controlboard/updateItem/${oldData._id}`, form).then((res)=>{
             if(res.data.success){
-                closeAddItem(res.data.success,res.data.message);
+                closeEditCategory(res.data.success,res.data.message);
             }else{
-                closeAddItem(res.data.success,res.data.message);
+                closeEditCategory(res.data.success,res.data.message);
             }
         })
     };
@@ -36,16 +43,16 @@ return (
                 <AiOutlineArrowRight/> 
                 <h1>إضافة صنف</h1>
             </button>
-            <form className="flex flex-col justify-between gap-5 w-full mt-10 overflow-hidden px-6 h-full font-semibold text-xl" onSubmit={handleSubmit(onSubmit)} >
+            <form className="flex flex-col justify-between gap-5 w-full mt-10 overflow-hidden px-6 h-full" onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-10 w-full  overflow-y-auto px-6">
                     <div className="flex flex-col gap-2 w-full">
                         <label>اسم الصنف</label>
-                        <input type="text" {...register("itemName", {
+                        <input defaultValue={oldData?.title} type="text" {...register("title", {
                             required:{ value: true, message: "هذا الحقل مطلوب" },
-                        })} className={`py-3 px-4 rounded-full border outline-none ${errors?.itemName ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
-                        {errors?.itemName && (
+                        })} className={`py-3 px-4 rounded-full border outline-none ${errors?.title ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
+                        {errors?.title && (
                             <small className="text-red-500 text-xs pr-4">
-                                {errors?.itemName.message}
+                                {errors?.title.message}
                             </small>
                             )}
                     </div>
@@ -53,8 +60,8 @@ return (
                         <div className='flex flex-col gap-4 justify-around w-full md:w-[50%] h-full '>
                             <div className="flex flex-col gap-2 w-full">
                                 <label>السعر</label>
-                                <div className="w-full relative">
-                                    <input type="number" {...register("price", {
+                                <div  className="w-full relative">
+                                    <input  defaultValue={oldData?.price} type="number" {...register("price", {
                                         required:{ value: true, message: "هذا الحقل مطلوب" },})} 
                                         className={`py-3 px-4 rounded-full w-full border outline-none ${errors?.price ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                                     <p className='absolute left-[0px] inset-y-0 rounded-l-full py-3 px-6 bg-gray-300 font-semibold'>SAR</p>
@@ -68,7 +75,7 @@ return (
                             <div className="flex flex-col gap-2 w-full">
                                 <label>السعرات الحرارية</label>
                                 <div className="w-full relative">
-                                    <input type="number" {...register("calories", {
+                                    <input  defaultValue={oldData?.calories} type="number" {...register("calories", {
                                         required:{ value: true, message: "هذا الحقل مطلوب" },})} 
                                         className={`py-3 px-4 rounded-full w-full border outline-none ${errors?.calories ?"bg-red-100 border-red-300":"bg-gray-100   border-gray-300"}`} />
                                     <p className='absolute left-[0px] inset-y-0 rounded-l-full py-3 px-6 bg-gray-300 font-semibold'>Kcal</p>
@@ -90,15 +97,15 @@ return (
                                 </div>:<div className='bg-white w-full h-full flex justify-center items-center'>
                                         <img src={img} alt="" className="w-[50%] m-auto" />
                                         </div>}
-                                    <input id="dropzone" {...register("itemImage",{
+                                    <input  id="dropzone" {...register("image",{
                                         onChange: (e) => setimg(URL.createObjectURL(e.target.files[0])),
-                                        required:{ value: true, message: "هذا الحقل مطلوب" },
+                                        // required:{ value: true, message: "هذا الحقل مطلوب" },
                                         })} accept="image/*" type="file" className="hidden"/>
                                 </label>
                             </div> 
-                            {errors?.itemImage && (
+                            {errors?.image && (
                                 <small className="text-red-500 text-xs ">
-                                    {errors?.itemImage.message}
+                                    {errors?.image.message}
                                 </small>
                                 )}
                         </div>
@@ -106,6 +113,7 @@ return (
                     <div className="flex flex-col gap-2 w-[80%] md:w-[60%]">
                             <label>وصف الصنف</label>
                             <textarea
+                                defaultValue={oldData?.description}
                                 rows={"4"}
                                 {...register("description")} 
                                 className="py-3 px-4 rounded-xl border outline-none bg-gray-100  border-gray-300" />
@@ -115,13 +123,13 @@ return (
                     </div>
                 </div>
                 <div className="flex justify-end gap-3 items-center">
-                    <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={()=>closeAddItem(false,"تم تجاهل اضافه تصنيف")}>تجاهل</button>
+                    <button className="text-red-500 hover:text-red-600 bg-transparent" onClick={close}>تجاهل</button>
                     <input type="submit" value="حفظ" className="bg-blue-500 hover:bg-blue-700 w-[80px] text-white py-2 rounded-full cursor-pointer"/>
                 </div>
             </form>
         </div>
     </div>
-)
+  )
 }
 
-export default AddItem
+export default UpdateItem
