@@ -1,7 +1,6 @@
 import Theme from '../components/Theme'
 
 const Settings = () => {
-
 	return (
 		<div className='lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto'>
 			<hr className='hidden lg:block lg:my-10' />
@@ -14,7 +13,7 @@ const Settings = () => {
 				</p>
 				<p className='text-lg py-3 w-fit'>المظهر</p>
 			</div>
-      <Theme />
+			<Theme />
 		</div>
 	)
 }
