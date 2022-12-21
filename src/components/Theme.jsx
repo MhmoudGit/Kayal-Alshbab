@@ -5,7 +5,21 @@ const Theme = () => {
 			<p className='font-bold text-xl mt-7'>النمط</p>
 			<div className='py-8'>
 				<img src='Capture.PNG' alt='theme1' className='w-44' />
-				<p className='p-3'>افتراضي</p>
+				<div class='flex items-center m-3'>
+				<label
+						for='inline-radio'
+						class='ml-2 text-xl font-bold'
+					>
+						افتراضي
+					</label>
+					<input
+						id='inline-radio'
+						type='radio'
+						value=''
+						name='inline-radio-group'
+						class='w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 '
+					/>
+				</div>
 			</div>
 		</div>
 	)
