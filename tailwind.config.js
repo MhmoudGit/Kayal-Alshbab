@@ -7,7 +7,7 @@ module.exports = {
         sfpro: ["sfpro", "sans-serif"],
       },
       backgroundImage: {
-        logo: "url('/src/img/logo.png')",
+        logo: "url('/src/img/profile.png')",
       },
     },
   },
