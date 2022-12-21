@@ -1,12 +1,29 @@
 import { useState } from "react"
 import { IoIosCopy } from "react-icons/io"
-import { MdEdit } from "react-icons/md"
 import profile from "../img/profile.png"
 import cover from "../img/cover.png"
+import { useForm } from "react-hook-form"
+import saudi from "../img/saudi.svg"
 
 const Restaurant = () => {
-  const [coverImg, setCoverImg] = useState()
-  const [profileImg, setProfileImg] = useState()
+  const [coverImg, setCoverImg] = useState("")
+  const [profileImg, setProfileImg] = useState("")
+
+  const regex = /^(ftp|http|https):\/\/[^ "]+$/
+  const phoneRegex = /^((?:[+?0?0?966]+)(?:\s?\d{2})(?:\s?\d{7}))$/
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = (data) => {
+    console.log(data)
+    reset()
+  }
+
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
       <hr className="hidden lg:block lg:my-10" />
@@ -20,71 +37,109 @@ const Restaurant = () => {
         <div className="bg-[#e0f6f4] p-4 flex flex-col gap-2 text-lg font-medium text-[#5b5a87]">
           <p className="flex items-center gap-2">
             رابط لمواقع التواصل :{" "}
-            <a href="" className="text-[#3b38cc] text-lg">
+            <a href="https://facebook.com" className="text-[#3b38cc] text-lg">
               yousef-omar.yallaqrcodes.com
             </a>
             <IoIosCopy className="text-[#3b38cc] text-lg" />
           </p>
           <p>شارك هذا الرابط على مطعمك في انستقرام وقوقل ماب</p>
         </div>
-        <form className="max-w-2xl mx-auto py-8 px-4">
-          <div className="w-full h-44 md:h-[20rem] rounded-xl overflow-hidden">
-            {coverImg ? (
-              <img
-                src={URL.createObjectURL(coverImg) || cover}
-                alt="user cover image"
-                className="object-cover w-full h-full"
-              />
-            ) : (
-              <img
-                src={cover}
-                alt="user cover image"
-                className="object-cover w-full h-full"
-              />
-            )}
-            <label
-              htmlFor="cover"
-              className="absolute cursor-pointer top-4 right-4 text-white p-2 text-xl rounded-full bg-oxford-800 hover:bg-oxford-900"
-            >
-              <MdEdit />
+        <form
+          className="max-w-xl mx-auto py-8 px-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div
+            className="flex items-center justify-center rounded-xl overflow-hidden w-full h-44 md:h-[20rem] bg-cover bg-no-repeat bg-center"
+            style={{ backgroundImage: `url(${cover})` }}
+          >
+            <label className="overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center w-full h-44 md:h-[20rem] rounded-lg cursor-pointer">
+              {coverImg === "" ? (
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    aria-hidden="true"
+                    className="w-10 h-10 mb-3 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-900">
+                    <span className="font-semibold">اسحب الصورة هنا </span> أو
+                    اضغط لتصفح الملفات
+                  </p>
+                  <p className="text-xs text-gray-900 ">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-white w-full h-full">
+                  <img src={coverImg} alt="cover" />
+                </div>
+              )}
               <input
+                id="dropzone"
+                {...register("cover", {
+                  onChange: (e) =>
+                    setCoverImg(URL.createObjectURL(e.target.files[0])),
+                })}
+                accept="image/*"
                 type="file"
-                id="cover"
                 className="hidden"
-                onChange={(e) =>
-                  setCoverImg(e.target.files && e.target.files[0])
-                }
               />
             </label>
           </div>
-          <div className="group relative bottom-16 w-full">
-            {profileImg ? (
-              <img
-                src={URL.createObjectURL(profileImg) || profile}
-                alt=""
-                className="border-2 rounded-full object-cover w-[160px] h-[160px]"
-              />
-            ) : (
-              <img
-                src={profile}
-                alt=""
-                className="border-2 rounded-full object-cover w-[160px] h-[160px]"
-              />
-            )}
-            <label
-              htmlFor="profile"
-              className="absolute hidden cursor-pointer bottom-1 right-1 text-white p-1 text-xl rounded-full bg-oxford-800 hover:bg-oxford-900 group-hover:flex"
+          <div className="group relative bottom-16 rounded-full w-fit overflow-hidden">
+            <div
+              className="flex items-center justify-center overflow-hidden w-[160px] h-[160px] rounded-full bg-contain bg-no-repeat bg-center"
+              style={{ backgroundImage: `url(${profile})` }}
             >
-              <MdEdit />
-              <input
-                type="file"
-                id="profile"
-                className="hidden"
-                onChange={(e) =>
-                  setProfileImg(e.target.files && e.target.files[0])
-                }
-              />
-            </label>
+              <label className="overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center cursor-pointer w-[160px] h-[160px] rounded-full">
+                {profileImg === "" ? (
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg
+                      aria-hidden="true"
+                      className="w-10 h-10 mb-3 text-gray-900"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p className="mb-2 text-xs text-center text-gray-900">
+                      <span className="font-semibold">اسحب الصورة هنا </span> أو
+                      اضغط لتصفح الملفات
+                    </p>
+                  </div>
+                ) : (
+                  <div className="bg-white w-[160px] h-[160px] rounded-full overflow-hidden flex justify-center items-center">
+                    <img src={profileImg} alt="profile" className="" />
+                  </div>
+                )}
+                <input
+                  id="dropzone"
+                  {...register("profile", {
+                    onChange: (e) =>
+                      setProfileImg(URL.createObjectURL(e.target.files[0])),
+                  })}
+                  accept="image/*"
+                  type="file"
+                  className="hidden"
+                />
+              </label>
+            </div>
           </div>
           <div className="text-[#5b5a87] flex flex-col gap-6">
             <div className="flex flex-col gap-1">
@@ -93,9 +148,20 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className={`rounded-full p-4 outline-none border ${
+                  errors.name
+                    ? "border-red-500 bg-red-200"
+                    : "border-[#d7d6ff] bg-[#f5f5ff]"
+                }`}
+                {...register("name", {
+                  required: { value: true, message: "هذا الحقل مطلوب" },
+                })}
               />
+              {errors.name ? (
+                <small className="text-xs text-red-500">
+                  {errors.name.message}
+                </small>
+              ) : null}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="" className="text-base font-semibold">
@@ -103,21 +169,47 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("website", {
+                  required: { value: true, message: "هذا الحقل مطلوب" },
+                  pattern: {
+                    value: regex,
+                    message: "فضلاًً أدخل موقعاً إلكترونياً صالحاً",
+                  },
+                })}
               />
-              <small className="text-xs">هذا الحقل اختياري</small>
+              {errors.website ? (
+                <small className="text-xs text-red-500">
+                  {errors.website.message}
+                </small>
+              ) : (
+                <small className="text-xs">هذا الحقل اختياري</small>
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="" className="text-base font-semibold">
                 رقم الجوال
               </label>
               <input
-                type="number"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                type="tel"
+                defaultValue="+966"
+                className="rounded-full w-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                dir="ltr"
+                {...register("phone", {
+                  required: { value: true, message: "هذا الحقل مطلوب" },
+                  pattern: {
+                    value: phoneRegex,
+                    message: "فضلاًً أدخل رقم جوال صالح",
+                  },
+                })}
               />
-              <small className="text-xs">هذا الحقل اختياري</small>
+              {errors.phone ? (
+                <small className="text-xs text-red-500">
+                  {errors.phone.message}
+                </small>
+              ) : (
+                <small className="text-xs">هذا الحقل اختياري</small>
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <label htmlFor="" className="text-base font-semibold">
@@ -125,8 +217,8 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("whatsapp")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -137,7 +229,8 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("instagram")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -147,8 +240,8 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("snapchat")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -158,8 +251,8 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("tiktok")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -170,7 +263,8 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("twitter")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -181,7 +275,8 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("facebook")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -192,7 +287,8 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("google_map")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
@@ -203,7 +299,8 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-3 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                {...register("menu_site")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
             </div>
