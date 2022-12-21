@@ -20,7 +20,7 @@ const Restaurant = () => {
         <div className="bg-[#e0f6f4] p-4 flex flex-col gap-2 text-lg font-medium text-[#5b5a87]">
           <p className="flex items-center gap-2">
             رابط لمواقع التواصل :{" "}
-            <a href="" className="text-[#3b38cc] text-lg">
+            <a  href="yousef-omar.yallaqrcodes.com" className="text-[#3b38cc] text-lg">
               yousef-omar.yallaqrcodes.com
             </a>
             <IoIosCopy className="text-[#3b38cc] text-lg" />
@@ -32,13 +32,13 @@ const Restaurant = () => {
             {coverImg ? (
               <img
                 src={URL.createObjectURL(coverImg) || cover}
-                alt="user cover image"
+                alt="user cover"
                 className="object-cover w-full h-full"
               />
             ) : (
               <img
                 src={cover}
-                alt="user cover image"
+                alt="user cover"
                 className="object-cover w-full h-full"
               />
             )}
