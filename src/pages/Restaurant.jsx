@@ -3,7 +3,7 @@ import { IoIosCopy } from "react-icons/io"
 import profile from "../img/profile.png"
 import cover from "../img/cover.png"
 import { useForm } from "react-hook-form"
-import saudi from "../img/saudi.svg"
+import { BsTrash } from "react-icons/bs"
 
 const Restaurant = () => {
   const [coverImg, setCoverImg] = useState("")
@@ -24,6 +24,11 @@ const Restaurant = () => {
     reset()
   }
 
+  const removeImg = (e, setState) => {
+    e.preventDefault()
+    setState("")
+  }
+
   return (
     <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh] overflow-y-auto">
       <hr className="hidden lg:block lg:my-10" />
@@ -34,7 +39,7 @@ const Restaurant = () => {
         <span className="text-gray-400 text-base">ID: Yalla4131</span>
       </div>
       <div className="rounded-xl bg-white max-w-5xl md:mx-auto overflow-hidden mx-4">
-        <div className="bg-[#e0f6f4] p-4 flex flex-col gap-2 text-lg font-medium text-[#5b5a87]">
+        <div className="bg-[#e0f6f4] p-3.5 flex flex-col gap-2 text-lg font-medium text-[#5b5a87]">
           <p className="flex items-center gap-2">
             رابط لمواقع التواصل :{" "}
             <a
@@ -47,26 +52,51 @@ const Restaurant = () => {
           </p>
           <p>شارك هذا الرابط على مطعمك في انستقرام وقوقل ماب</p>
         </div>
-        <form className="max-w-2xl mx-auto py-8 px-4">
-          <div className="w-full h-44 md:h-[20rem] rounded-xl overflow-hidden">
-            {coverImg ? (
-              <img
-                src={URL.createObjectURL(coverImg) || cover}
-                alt="user cover"
-                className="object-cover w-full h-full"
-              />
-            ) : (
-              <img
-                src={cover}
-                alt="user cover"
-                className="object-cover w-full h-full"
-              />
-            )}
-            <label
-              htmlFor="cover"
-              className="absolute cursor-pointer top-4 right-4 text-white p-2 text-xl rounded-full bg-oxford-800 hover:bg-oxford-900"
-            >
-              <MdEdit />
+        <form
+          className="max-w-2xl mx-auto py-8 px-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div
+            className="flex items-center justify-center w-full bg-cover bg-no-repeat rounded-lg overflow-hidden"
+            style={{ backgroundImage: `url(${cover})` }}
+          >
+            <label className="overflow-hidden flex flex-col items-center justify-center w-full h-[22rem] cursor-pointer">
+              {coverImg === "" ? (
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    aria-hidden="true"
+                    className="w-10 h-10 mb-3 text-gray-900"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-900 ">
+                    <span className="font-semibold">اسحب الصورة هنا </span> أو
+                    اضغط لتصفح الملفات
+                  </p>
+                  <p className="text-xs text-gray-900 ">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-white w-full h-full relative flex justify-center items-center">
+                  <img src={coverImg} alt="cover" />
+                  <button
+                    className="absolute top-4 left-4 w-8 h-8 p-1.5 rounded-full bg-red-500 text-white flex items-center justify-center"
+                    onClick={(e) => removeImg(e, setCoverImg)}
+                  >
+                    <BsTrash className="text-lg" />
+                  </button>
+                </div>
+              )}
               <input
                 id="dropzone"
                 {...register("cover", {
@@ -84,7 +114,7 @@ const Restaurant = () => {
               className="flex items-center justify-center overflow-hidden w-[160px] h-[160px] rounded-full bg-contain bg-no-repeat bg-center"
               style={{ backgroundImage: `url(${profile})` }}
             >
-              <label className="overflow-hidden backdrop-grayscale bg-white/30 backdrop-blur-sm flex flex-col items-center justify-center cursor-pointer w-[160px] h-[160px] rounded-full">
+              <label className="overflow-hidden flex flex-col items-center justify-center cursor-pointer w-[160px] h-[160px] rounded-full">
                 {profileImg === "" ? (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg
@@ -108,8 +138,14 @@ const Restaurant = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className="bg-white w-[160px] h-[160px] rounded-full overflow-hidden flex justify-center items-center">
-                    <img src={profileImg} alt="profile" className="" />
+                  <div className="bg-white relative w-[160px] h-[160px] rounded-full overflow-hidden flex justify-center items-center">
+                    <img src={profileImg} alt="profile" />
+                    <button
+                      className="absolute top-6 left-6 w-8 h-8 p-1.5 rounded-full bg-red-500 text-white flex items-center justify-center"
+                      onClick={(e) => removeImg(e, setProfileImg)}
+                    >
+                      <BsTrash className="text-lg" />
+                    </button>
                   </div>
                 )}
                 <input
@@ -132,7 +168,7 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                className={`rounded-full p-4 outline-none border ${
+                className={`rounded-full p-3.5 outline-none border ${
                   errors.name
                     ? "border-red-500 bg-red-200"
                     : "border-[#d7d6ff] bg-[#f5f5ff]"
@@ -153,7 +189,11 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className={`rounded-full p-3.5 outline-none border ${
+                  errors.website
+                    ? "border-red-500 bg-red-200"
+                    : "border-[#d7d6ff] bg-[#f5f5ff]"
+                }`}
                 {...register("website", {
                   required: { value: true, message: "هذا الحقل مطلوب" },
                   pattern: {
@@ -177,7 +217,11 @@ const Restaurant = () => {
               <input
                 type="tel"
                 defaultValue="+966"
-                className="rounded-full w-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className={`rounded-full p-3.5 outline-none border ${
+                  errors.phone
+                    ? "border-red-500 bg-red-200"
+                    : "border-[#d7d6ff] bg-[#f5f5ff]"
+                }`}
                 dir="ltr"
                 {...register("phone", {
                   required: { value: true, message: "هذا الحقل مطلوب" },
@@ -201,7 +245,7 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("whatsapp")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -213,7 +257,7 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("instagram")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -224,7 +268,7 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("snapchat")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -235,7 +279,7 @@ const Restaurant = () => {
               </label>
               <input
                 type="text"
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("tiktok")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -247,7 +291,7 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("twitter")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -259,7 +303,7 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("facebook")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -271,7 +315,7 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("google_map")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
@@ -283,7 +327,7 @@ const Restaurant = () => {
               <input
                 type="text"
                 placeholder=""
-                className="rounded-full p-4 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
+                className="rounded-full p-3.5 outline-none border border-[#d7d6ff] bg-[#f5f5ff]"
                 {...register("menu_site")}
               />
               <small className="text-xs">هذا الحقل اختياري</small>
