@@ -3,7 +3,7 @@ import Theme from '../components/Theme'
 import User from '../components/User'
 
 const Settings = () => {
-	const [page, setPage] = useState(false)
+	const [page, setPage] = useState(true)
 
 	return (
 		<div className='lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto'>
