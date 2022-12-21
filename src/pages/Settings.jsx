@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import Theme from '../components/Theme'
+import User from '../components/User'
 
 const Settings = () => {
+	const [page, setPage] = useState(false)
+
 	return (
 		<div className='lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto'>
 			<hr className='hidden lg:block lg:my-10' />
@@ -8,12 +12,24 @@ const Settings = () => {
 				<h2 className='text-2xl lg:text-4xl font-bold mx-3 mt-3'>الإعدادات</h2>
 			</div>
 			<div className='my-2 border-b mx-12 flex gap-8'>
-				<p className='text-lg py-3 text-blue-500 w-fit font-semibold border-b-2 border-blue-500'>
+				<button
+					className={`text-lg py-3 w-fit font-semibold ${
+						page ? 'text-blue-500 border-b-2 border-blue-500' : null
+					}`}
+					onClick={() => setPage(true)}
+				>
 					ادارة المستخدمين
-				</p>
-				<p className='text-lg py-3 w-fit'>المظهر</p>
+				</button>
+				<button
+					className={`text-lg py-3 w-fit font-semibold ${
+						page ? null : 'text-blue-500 border-b-2 border-blue-500'
+					}`}
+					onClick={() => setPage(false)}
+				>
+					المظهر
+				</button>
 			</div>
-			<Theme />
+			{page ? <User /> : <Theme />}
 		</div>
 	)
 }
