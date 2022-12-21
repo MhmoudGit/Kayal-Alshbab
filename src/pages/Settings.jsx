@@ -8,10 +8,10 @@ const Settings = () => {
 				<h2 className='text-2xl lg:text-4xl font-bold mx-3 mt-3'>الإعدادات</h2>
 			</div>
 			<div className='my-2 border-b mx-12 flex gap-8'>
-				<p className='text-lg py-3 text-blue-500 w-fit font-semibold border-b-2 border-blue-500'>
+				<button className='text-lg py-3 text-blue-500 w-fit font-semibold border-b-2 border-blue-500'>
 					ادارة المستخدمين
-				</p>
-				<p className='text-lg py-3 w-fit'>المظهر</p>
+				</button>
+				<button className='text-lg py-3 w-fit'>المظهر</button>
 			</div>
 			<Theme />
 		</div>
