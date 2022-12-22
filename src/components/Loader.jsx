@@ -1,6 +1,6 @@
 const Loader = () => {
   return (
-    <section className="fixed w-full h-full bg-gray-900/50 backdrop-blur-sm flex items-center justify-center">
+    <section className="fixed w-full z-50 h-full bg-gray-900/50 backdrop-blur-sm flex items-center justify-center">
       <div role="status">
         <svg
           className="inline mr-2 w-10 h-10 animate-spin text-gray-400 fill-blue-600"
