@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AiOutlinePlus } from "react-icons/ai"
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai"
 import Classtype from "./Classtype"
 import AddItem from "./AddItem"
 import Deletemenu from "./Deletemenu"
@@ -7,7 +7,6 @@ import axios from "axios"
 import UpdateCategory from "./UpdateCategory"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import { Disclosure } from "@headlessui/react"
 
 const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
   // Updating category
@@ -45,12 +44,6 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
     setEndCategory(true)
   }
 
-  const closeEditCategory = (success, message) => {
-    toastopen(success, message)
-    setEdit(false)
-    setEndCategory(false)
-  }
-
   const Update = (
     <UpdateCategory
       oldData={data}
@@ -59,6 +52,7 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
         setEndCategory(false)
       }}
       closeEditCategory={closeEditCategory}
+      edit={edit}
     />
   )
   // -----------------------------------------
@@ -87,21 +81,25 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
   }, [additem, dltItem, endItem])
 
   return (
-    <div className="border m-4 rounded-lg font-semibold">
-      {additem && (
-        <AddItem
-          closeAddItem={closeAddItem}
-          close={() => setAddItem(false)}
-          categoryId={data._id}
-        />
-      )}
+    <div className="border m-4 rounded-lg font-semibold ">
+      <AddItem
+        closeAddItem={closeAddItem}
+        close={() => setAddItem(false)}
+        categoryId={data._id}
+        addItem={additem}
+      />
       <ToastContainer className="text-base font-semibold" />
       <div className="flex items-center">
         <p
           className="text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
         >
-          <AiOutlinePlus className="mx-2" /> {data.title}
+          {list ? (
+            <AiOutlineMinus className={`mx-2`} />
+          ) : (
+            <AiOutlinePlus className={`mx-2`} />
+          )}
+          {data.title}
         </p>
 
         {/* Delete Menu */}

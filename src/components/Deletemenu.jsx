@@ -14,8 +14,8 @@ const Deletemenu = ({
 
   return (
     <div className="relative">
-      {edit && updateItem}
-      {editCat && updateCategory}
+      {updateItem}
+      {updateCategory}
       <BsThreeDotsVertical
         className="cursor-pointer text-2xl mx-3"
         onClick={() => setmenu(!menu)}
