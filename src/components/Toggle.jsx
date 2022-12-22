@@ -4,7 +4,7 @@ const Toggle = ({ status }) => {
   const toggle = () => {
     axios
       .post(
-        `https://kayal-api.onrender.com/controlBoard/updateItemStatus/${status._id}`,
+        `https://victorious-pink-turtleneck-shirt.cyclic.app/controlBoard/updateItemStatus/${status._id}`,
         {}
       )
       .then((res) => res.data.success);

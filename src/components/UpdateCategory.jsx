@@ -6,7 +6,7 @@ import FormData from "form-data";
 
 function UpdateCategory({oldData, close,closeEditCategory}) {
 
-    const [img,setimg]=useState(`https://kayal-api.onrender.com/${oldData.image}`);
+    const [img,setimg]=useState(`${oldData.image}`);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -21,7 +21,7 @@ function UpdateCategory({oldData, close,closeEditCategory}) {
             form.append("image",values.image[0])
             form.append("title",values.title)
         }
-        axios.post(`https://kayal-api.onrender.com/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
+        axios.post(`https://victorious-pink-turtleneck-shirt.cyclic.app/controlboard/updateCategory/${oldData._id}`,form).then((res)=>{
             if(res.data.success){
                 closeEditCategory(res.data.success,res.data.message);
             }else{
