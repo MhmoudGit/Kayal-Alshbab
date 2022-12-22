@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Classtype from "./Classtype";
 import AddItem from "./AddItem";
 import Deletemenu from "./Deletemenu";
@@ -96,7 +96,8 @@ return (
           className="bg-white text-xl cursor-pointer py-5 px-3 w-full flex items-center"
           onClick={() => setList(!list)}
         >
-          <AiOutlinePlus className="mx-2" /> {data.title}
+          {list ? <AiOutlineMinus className={`mx-2`}/> : <AiOutlinePlus className={`mx-2`} />}
+           {data.title}
         </p>
 
         {/* Delete Menu */}
