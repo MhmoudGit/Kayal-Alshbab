@@ -3,7 +3,7 @@ const Singleitem = ({item}) => {
   return (
     <div className="flex gap-5">
       <img
-        src={`${item.image}`}
+        src={`https://kayal-api.onrender.com/${item.image}`}
         alt="img"
         className="w-16 rounded-md h-16"
       />
