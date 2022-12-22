@@ -14,9 +14,9 @@ function Login() {
         }
     }
     return (
-    <div className='w-full'>
-        <h1 className='font-semibold text-3xl max-w-xl mx-auto mt-10 mb-5'>ﺗﺴﺠﻴﻞ اﻟﺪﺧﻮل</h1>
-        <div className='max-w-xl bg-white mx-auto p-4 rounded-xl'>
+    <div className='w-full py-10'>
+        <h1 className='font-semibold text-3xl max-w-xl mx-auto mt-10 mb-5 px-5'>ﺗﺴﺠﻴﻞ اﻟﺪﺧﻮل</h1>
+        <div className='max-w-xl bg-white mx-auto p-4 py-10 rounded-xl shadow-md'>
             <form className='w-full flex flex-col gap-4 px-4 h-full'  onSubmit={handleSubmit(onSubmit)} >
                 <div className="flex flex-col gap-2 w-full">
                             <label className='text-gray-500 px-5'>البريد الإلكتروني</label>
