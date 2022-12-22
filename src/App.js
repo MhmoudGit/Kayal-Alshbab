@@ -15,7 +15,6 @@ function App() {
     >
       <Router>
         <Navbar />
-        {/* <Loader /> */}
         <Routes>
           <Route path="/" element={<Menu />} />
           <Route path="/dashboard" element={<Dashboard />} />
