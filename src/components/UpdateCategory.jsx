@@ -4,7 +4,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 import axios from 'axios';
 import FormData from "form-data";
 
-function UpdateCategory({oldData, close,closeEditCategory}) {
+function UpdateCategory({oldData, close,closeEditCategory,edit}) {
 
     const [img,setimg]=useState(`https://kayal-api.onrender.com/${oldData.image}`);
 
@@ -31,8 +31,12 @@ function UpdateCategory({oldData, close,closeEditCategory}) {
     };
 
 return (
-    <div className= "fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
-        <div className="flex flex-col gap-4  bg-white py-10  shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full">
+    <div className= {`fixed top-0 h-full transition-all w-full duration-[0.5s] z-50 ${
+        edit ? "inset-x-0 backdrop-blur-sm" : "backdrop-blur-0 left-[100vw]"
+    }`}>
+        <div className={`flex flex-col gap-4 bg-white py-10 transition-all duration-[1s] shadow-xl w-full md:w-[50%] fixed right-0 top-0 z-50 h-full ${
+        edit ? "inset-x-0" : "left-[100vw]"
+        }`}>
                 <button className="flex gap-2 items-center text-3xl font-extrabold bg-transparent border-none px-5 "
                 onClick={close}
                 >

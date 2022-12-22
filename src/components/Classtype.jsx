@@ -48,7 +48,8 @@ const Classtype = ({ item, dltItem ,setEndItem}) => {
   const Update = <UpdateItem oldData={item} close={() =>{
     setEditItem(false)
     setEndItem(false)
-  }}  closeEditCategory={closeEditCategory}/>;
+  }}  closeEditCategory={closeEditCategory}
+  editItem={editItem}/>;
   return (
     <div className="flex justify-between items-center p-3 gap-2">
       <Singleitem item={item} /> {/* Single items inside the class list */}

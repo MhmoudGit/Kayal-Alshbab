@@ -54,7 +54,8 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
   const Update = <UpdateCategory oldData={data} close={() => {
     setEdit(false);
     setEndCategory(false);
-  }} closeEditCategory={closeEditCategory} />;
+  }} closeEditCategory={closeEditCategory} 
+  edit={edit}/>;
   // -----------------------------------------
 
   const [list, setList] = useState(false);
