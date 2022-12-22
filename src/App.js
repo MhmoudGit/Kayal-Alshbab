@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Dashboard from "./pages/Dashboard"
+import Login from "./pages/Login"
 import Menu from "./pages/Menu"
 import Qrcode from "./pages/Qrcode"
 import Restaurant from "./pages/Restaurant"
@@ -15,7 +16,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Menu />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Menu/>} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/qr-code" element={<Qrcode />} />
