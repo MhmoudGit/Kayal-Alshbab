@@ -4,7 +4,7 @@ import { AiOutlineArrowRight } from "react-icons/ai"
 import axios from "axios"
 import FormData from "form-data"
 
-function AddMenu({ closeAddmenu, close, addMenu }) {
+function AddMenu({ closeAddmenu, close, addMenu, setIsLoading }) {
   const [img, setimg] = useState("")
   const {
     register,
@@ -18,13 +18,16 @@ function AddMenu({ closeAddmenu, close, addMenu }) {
     form.append("title", values.categoryName)
     form.append("image", values.categoryImage[0])
 
+    setIsLoading(true)
     axios
       .post("https://kayal-api.onrender.com/controlboard/createCategory", form)
       .then((res) => {
         if (res.data.success) {
           closeAddmenu(res.data.success, res.data.message)
+          setIsLoading(false)
         } else {
           closeAddmenu(res.data.success, res.data.message)
+          setIsLoading(false)
         }
       })
   }

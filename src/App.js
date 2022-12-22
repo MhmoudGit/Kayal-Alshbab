@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Loader from "./components/Loader"
 import Navbar from "./components/Navbar"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/Login"
@@ -11,6 +12,8 @@ import Settings from "./pages/Settings"
 
 function App() {
   const [login, setLogin] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  console.log(isLoading)
 
   return (
     <div
@@ -20,9 +23,10 @@ function App() {
       {login ? (
         <Router>
           <Navbar />
+          {isLoading ? <Loader /> : null}
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Menu />} />
+            <Route path="/" element={<Menu setIsLoading={setIsLoading} />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/restaurant" element={<Restaurant />} />
             <Route path="/qr-code" element={<Qrcode />} />
