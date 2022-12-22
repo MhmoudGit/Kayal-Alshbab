@@ -31,8 +31,8 @@ function AddMenu({ closeAddmenu, close, addMenu }) {
 
   return (
     <div
-      className={`fixed top-0 h-full transition-all w-full duration-[0.5s] backdrop-blur-sm bg-gray/30 z-50 ${
-        addMenu ? "inset-x-0" : "left-[100vw]"
+      className={`fixed top-0 h-full transition-all w-full duration-[0.5s] z-50 ${
+        addMenu ? "inset-x-0 backdrop-blur-sm" : "backdrop-blur-0 left-[100vw]"
       }`}
     >
       <div

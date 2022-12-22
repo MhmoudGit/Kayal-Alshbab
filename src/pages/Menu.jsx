@@ -7,12 +7,14 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import promo from "../img/promo.png"
 import { useForm } from "react-hook-form"
+import Loader from "../components/Loader"
 
 const Menu = () => {
   const [addMenu, setaddMenu] = useState(false)
   const [items, setItems] = useState()
   const [endCategory, setEndCategory] = useState()
   const [value, setValue] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
   const tabs = ["نظرة عامة", "العرض الدعائي"]
 
@@ -21,10 +23,12 @@ const Menu = () => {
   }
 
   const fetchData = () => {
-    axios
-      .get("https://kayal-api.onrender.com/menu/getCategory")
-      .then((res) => setItems(res.data.Data));
-  };
+    setIsLoading(true)
+    axios.get("https://kayal-api.onrender.com/menu/getCategory").then((res) => {
+      setIsLoading(false)
+      setItems(res.data.Data)
+    })
+  }
 
   const toastopen = (success, message) => {
     if (success === true) {
@@ -53,19 +57,23 @@ const Menu = () => {
   }
 
   const deleteData = (id) => {
-    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteCategory/${id}`)
-        .then(res => {
-          toastopen(res.data.success,res.data.message);
-          fetchData();
-        })
+    axios
+      .delete(
+        `https://kayal-api.onrender.com/controlBoard/deleteCategory/${id}`
+      )
+      .then((res) => {
+        toastopen(res.data.success, res.data.message)
+        fetchData()
+      })
   }
 
   const deleteItem = (id) => {
-    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteItem/${id}`)
-        .then(res => {
-          toastopen(res.data.success,res.data.message);
-          fetchData();
-        })
+    axios
+      .delete(`https://kayal-api.onrender.com/controlBoard/deleteItem/${id}`)
+      .then((res) => {
+        toastopen(res.data.success, res.data.message)
+        fetchData()
+      })
   }
 
   const closeAddmenu = (s, m) => {
@@ -77,6 +85,7 @@ const Menu = () => {
     fetchData()
   }, [addMenu, endCategory])
 
+  if (isLoading) <Loader />
   return (
     <div className="lg:w-5/6 relative select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto">
       <AddMenu
