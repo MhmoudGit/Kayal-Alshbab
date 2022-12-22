@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Loader from "./components/Loader"
 import Navbar from "./components/Navbar"
 import Dashboard from "./pages/Dashboard"
 import Menu from "./pages/Menu"
@@ -14,6 +15,7 @@ function App() {
     >
       <Router>
         <Navbar />
+        {/* <Loader /> */}
         <Routes>
           <Route path="/" element={<Menu />} />
           <Route path="/dashboard" element={<Dashboard />} />

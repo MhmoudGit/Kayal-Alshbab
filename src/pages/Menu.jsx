@@ -82,10 +82,12 @@ const Menu = () => {
   }, [addMenu, endCategory])
 
   return (
-    <div className="lg:w-5/6 select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto">
-      {addMenu && (
-        <AddMenu closeAddmenu={closeAddmenu} close={() => setaddMenu(false)} />
-      )}
+    <div className="lg:w-5/6 relative select-non max-h-[70vh] lg:max-h-[100vh]  overflow-y-auto">
+      <AddMenu
+        closeAddmenu={closeAddmenu}
+        close={() => setaddMenu(false)}
+        addMenu={addMenu}
+      />
       <ToastContainer className="text-base font-semibold" />
       {/* <AddMenu/> */}
       <hr className="hidden lg:block lg:my-10" />
