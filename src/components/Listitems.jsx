@@ -82,15 +82,14 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
 
 return (
     <div className="border m-4 rounded-lg font-semibold ">
-      {additem && (
         <AddItem
           closeAddItem={closeAddItem}
           close={() => {
             setAddItem(false);
           }}
           categoryId={data._id}
+          addItem={additem}
         />
-      )}
       <ToastContainer className='text-base font-semibold' />
       <div className="flex items-center">
         <p
