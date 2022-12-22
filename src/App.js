@@ -4,12 +4,13 @@ import Navbar from "./components/Navbar"
 import Dashboard from "./pages/Dashboard"
 import Login from "./pages/Login"
 import Menu from "./pages/Menu"
+import NotFoundPage from "./pages/NotFoundPage"
 import Qrcode from "./pages/Qrcode"
 import Restaurant from "./pages/Restaurant"
 import Settings from "./pages/Settings"
 
 function App() {
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
 
 
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/qr-code" element={<Qrcode />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router> : <Login />}
       
