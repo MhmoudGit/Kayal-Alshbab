@@ -23,8 +23,8 @@ const Menu = () => {
   const fetchData = () => {
     axios
       .get("https://kayal-api.onrender.com/menu/getCategory")
-      .then((res) => setItems(res.data.Data))
-  }
+      .then((res) => setItems(res.data.Data));
+  };
 
   const toastopen = (success, message) => {
     if (success === true) {
@@ -53,23 +53,19 @@ const Menu = () => {
   }
 
   const deleteData = (id) => {
-    axios
-      .delete(
-        `https://kayal-api.onrender.com/controlBoard/deleteCategory/${id}`
-      )
-      .then((res) => {
-        toastopen(res.data.success, res.data.message)
-        fetchData()
-      })
+    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteCategory/${id}`)
+        .then(res => {
+          toastopen(res.data.success,res.data.message);
+          fetchData();
+        })
   }
 
   const deleteItem = (id) => {
-    axios
-      .delete(`https://kayal-api.onrender.com/controlBoard/deleteItem/${id}`)
-      .then((res) => {
-        toastopen(res.data.success, res.data.message)
-        fetchData()
-      })
+    axios.delete(`https://kayal-api.onrender.com/controlBoard/deleteItem/${id}`)
+        .then(res => {
+          toastopen(res.data.success,res.data.message);
+          fetchData();
+        })
   }
 
   const closeAddmenu = (s, m) => {

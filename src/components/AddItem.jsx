@@ -21,16 +21,14 @@ const AddItem = ({ close, categoryId, closeAddItem }) => {
     form.append("description", values.description)
     form.append("calories", values.calories)
 
-    axios
-      .post("https://kayal-api.onrender.com/controlboard/createItem", form)
-      .then((res) => {
-        if (res.data.success) {
-          closeAddItem(res.data.success, res.data.message)
-        } else {
-          closeAddItem(res.data.success, res.data.message)
-        }
-      })
-  }
+        axios.post("https://kayal-api.onrender.com/controlboard/createItem",form).then((res)=>{
+            if(res.data.success){
+                closeAddItem(res.data.success,res.data.message);
+            }else{
+                closeAddItem(res.data.success,res.data.message);
+            }
+        })
+    };
 
   return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
