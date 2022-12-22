@@ -9,7 +9,7 @@ import Restaurant from "./pages/Restaurant"
 import Settings from "./pages/Settings"
 
 function App() {
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
 
 
   return (
