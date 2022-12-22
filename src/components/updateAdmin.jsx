@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { MdEmail } from 'react-icons/md';
 
-function AddAdmin({closeAddAdmin ,close}) {
+function UpdateAdmin({oldData, close,closeEditAdmin}) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (values) => console.log(values);
+    
 return (
     <div className="fixed inset-x-0 top-0 w-full h-full backdrop-blur-sm bg-gray/30 z-50">
         <div className="flex flex-col gap-2  bg-white py-10  shadow-xl w-full md:w-[60%] lg:w-[50%] fixed right-0 top-0 z-50 h-full">
@@ -13,7 +14,7 @@ return (
                     onClick={close}
                     >
                     <AiOutlineArrowRight/> 
-                    <h1>إضافة مستخدم</h1>
+                    <h1>تعديل مستخدم</h1>
             </button>
             <form className="flex flex-col  gap-4 w-full mt-10  px-8 h-full overflow-y-scroll font-semibold" onSubmit={handleSubmit(onSubmit)} >
                     <h1 className='font-semibold text-[1.5rem]'>ملف المستخدم</h1>
@@ -58,4 +59,4 @@ return (
 )
 }
 
-export default AddAdmin
+export default UpdateAdmin
