@@ -49,6 +49,7 @@ const Listitems = ({ data, dlt, dltItem,setEndCategory}) => {
     toastopen(success,message);
     setEdit(false);
     setEndCategory(false);
+
   }
 
   const Update = <UpdateCategory oldData={data} close={() => {
