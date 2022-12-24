@@ -43,13 +43,12 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
   const openEditCategory = () => {
     setEdit(true)
     setEndCategory(true)
-  };
+  }
 
-  const closeEditCategory = (success,message)=>{
-    toastopen(success,message);
-    setEdit(false);
-    setEndCategory(false);
-
+  const closeEditCategory = (success, message) => {
+    toastopen(success, message)
+    setEdit(false)
+    setEndCategory(false)
   }
 
   const Update = (
@@ -107,6 +106,7 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
           ) : (
             <AiOutlinePlus className={`mx-2`} />
           )}
+
           {data.title}
         </p>
 
@@ -119,7 +119,7 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
           open={openEditCategory}
         />
       </div>
-      
+
       <Collapse isOpened={list}>
         {items?.map((one, i) => (
           <Classtype
@@ -130,10 +130,10 @@ const Listitems = ({ data, dlt, dltItem, setEndCategory }) => {
           />
         ))}
         <button
-            className="text-sm border font-bold rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
-            onClick={open}
-          >
-            <AiOutlinePlus className="mx-1" /> اضف صنف
+          className="text-sm border font-bold rounded-full p-4 text-blue-500 flex justify-center m-4 items-center"
+          onClick={open}
+        >
+          <AiOutlinePlus className="mx-1" /> اضف صنف
         </button>
       </Collapse>
     </div>

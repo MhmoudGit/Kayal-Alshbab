@@ -13,7 +13,6 @@ import Settings from "./pages/Settings"
 function App() {
   const [login, setLogin] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
-  console.log(isLoading)
 
   return (
     <div

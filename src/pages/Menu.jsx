@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import promo from "../img/promo.png"
 import { useForm } from "react-hook-form"
+import { BsTrash } from "react-icons/bs"
 
 const Menu = ({ setIsLoading }) => {
   const [addMenu, setaddMenu] = useState(false)
@@ -155,6 +156,11 @@ const MenuSection = ({
 const PromotionalSection = () => {
   const [promoImg, setPromoImg] = useState("")
 
+  const removeImg = (e) => {
+    e.preventDefault()
+    setPromoImg("")
+  }
+
   const {
     register,
     handleSubmit,
@@ -213,8 +219,14 @@ const PromotionalSection = () => {
                 </p>
               </div>
             ) : (
-              <div className="bg-white w-full h-full flex justify-center items-center">
-                <img src={promoImg} alt="" className="w-[50%] m-auto" />
+              <div className="bg-white relative w-full h-full flex justify-center items-center">
+                <img src={promoImg} alt="promo" />
+                <button
+                  className="absolute top-4 left-4 w-8 h-8 p-1.5 rounded-full bg-red-500 text-white flex items-center justify-center"
+                  onClick={(e) => removeImg(e)}
+                >
+                  <BsTrash className="text-lg" />
+                </button>
               </div>
             )}
             <input
